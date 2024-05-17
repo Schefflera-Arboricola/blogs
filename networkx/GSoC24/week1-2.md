@@ -1,10 +1,10 @@
 ---
-title: "Blog1: : GSoC (nx-parallels)"
+title: "Blog1: : GSoC (nx-parallel)"
 author: Aditi Juneja
 date: 2024-05-17 16:30:00 +0530
 ---
 
-# Blog1: GSoC (nx-parallels)
+# Blog1: GSoC (nx-parallel)
 
 ## Week 1-2 (3rd May to 16th May, 2024)
 
