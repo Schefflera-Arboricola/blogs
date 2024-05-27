@@ -10,7 +10,7 @@ date: 2024-05-17 16:30:00 +0530
 
 ### GSoC - Community Bonding Period
 
-#### 1. Automating `get_info` updation
+## 1. Automating `get_info` updation
 
 NetworkX uses [`entry-points`](https://packaging.python.org/en/latest/specifications/entry-points/) to automatically discover its backends. Backends can define two `entry-points`, the `networkx.backends` entry-point which stores the `Dispatcher` class and `networkx.backend_info` entry-point which stores the `get_info` function which is loaded and called by networkx while creating the docs website. The `get_info` function returns a dictionary having all the information(metadata) about the backend, something like this:
 
@@ -49,7 +49,7 @@ But, seeing a decorator being used in nx-cugraph gave me some ideas on how I cou
 - this decorator could also perform the graph conversion(from `nxp.ParallelGraph` to `nx.Graph`) that we perform in all the functions, as of now.
 - and this might also help in indicating if a function doesn't show any speedups (wrt to its sequential implementation) or if a function is proven to be impossible to parallelize.
 
-#### 2. Timing script
+## 2. Timing script
 
 A while back I reported this [issue#51](https://github.com/networkx/nx-parallel/issues/51) about how re-running the present timing script generates some very inconsistent heatmaps. These were caused because we were running the algorithms only once and timing them. So, if your laptop was running a heavier process in the background or it went into sleep mode then the time reported in heatmaps would be way more than the actual time. I also opened the [PR#61](https://github.com/networkx/nx-parallel/pull/61) in which I used the `timeit.time` function instead of `time.time` but I don't think it made any difference. So, I started looking into how to time processes that create other parallel processes. Also, it didn't seem very clear to me what exactly it meant to time processes that are running in parallel. Do we take the process that took the maximum time or take an average time? And also we don't just have to time the parallel part, but also the non-parallel part of an algorithm. So, it seemed reasonable to account for the start time and end time of running an algorithm multiple times and then average out the time differences.
 
@@ -57,7 +57,7 @@ I also looked into how ASV benchmarks time their benchmarks and they use [`timei
 
 But, before implementing all this and re-generating all the heatmaps, I want to dig a bit deeper and figure out how exactly the `timeit.default_timer()` works internally in the coming weeks. And also if there are any other better alternative timing functions. And also look into how running and timing parallel processes on my local machine is different from running and timing them on the NetworkX's VM over SSH.
 
-#### 3. Revisiting nx-parallel algorithms
+## 3. Revisiting nx-parallel algorithms
 
 At the start of the community bonding period, I opened the [PR#63](https://github.com/networkx/nx-parallel/pull/63) in which I revisited all the algorithms in nx-parallel and added chunking and `get_chunks` to all the algorithms and this goal was in the "expanding" section and not the "revisiting" section in my GSoC proposal, but it seemed more apt to include it this PR(to know more about chunking and and `get_chunks` refer the [chunking section](https://github.com/networkx/nx-parallel/blob/main/CONTRIBUTING.md#chunking) in Contributor's guide of nx-parallel that I wrote or [this previous blog](https://schefflera-arboricola.github.io/Schefflera-Arboricola/NetworkX-Internship-Working-on-nx-parallel) by me).
 
@@ -67,11 +67,11 @@ I also revisited and enhanced the `is_reachable` and the `tournament_is_strongly
 
 And lastly, I checked if there were any updates from nx 3.3 and there were none for the algorithms in nx-parallel.
 
-#### 4. Switching from `hatchling` to `setuptools`
+## 4. Switching from `hatchling` to `setuptools`
 
 One more goal in the proposal was to switch from `hatchling` to `setuptools` as  nx-parallel is growing and maturing it’d be better to use setuptools because of its better feature support, flexibility, compatibility, and interactive capabilities as compared to Hatchling. Also, setuptools is more widely used and it's better for bigger projects and we need to explicitly mention all the packages(unlike hatchling), which ensures that all packages are being built. I switched to setuptools in [PR#67](https://github.com/networkx/nx-parallel/pull/67).
 
-#### 5. Proposal updates
+## 5. Proposal updates
 
 As suggested to all contributors in the GSoC contributor's meeting, I updated my proposal in the community bonding period.
 
@@ -83,7 +83,7 @@ And more importantly, I have updated the "Schedule of Deliverables" section to r
 
 Additionally, I have requested permission from my mentors to relocate the benchmarking tasks to the experimental section. This adjustment is necessary because as I was going through the joblib docs, I realised that setting up the configuration will require significant time due to my unfamiliarity with the various parallel backends. Understanding and integrating these with nx-parallel will be time-consuming. If relocating the tasks is not feasible at this point, I have suggested a possible extension of the project timeline by 2 weeks.
 
-#### 6. Other participations/contributions in NetworkX in the past two weeks
+## 6. Other participations/contributions in NetworkX in the past two weeks
 
 - https://github.com/networkx/networkx/pull/7434
 - https://github.com/networkx/networkx/discussions/7450
