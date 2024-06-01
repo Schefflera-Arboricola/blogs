@@ -1,6 +1,6 @@
 # GSoC’24 Proposal - NetworkX: Revisiting and expanding nx-parallel
 
-## - By Aditi Juneja([@Shefflera-Arboricola](https://github.com/Schefflera-Arboricola))
+## - By Aditi Juneja([@Schefflera-Arboricola](https://github.com/Schefflera-Arboricola))
 
 ## 1. Abstract
 
