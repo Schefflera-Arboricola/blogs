@@ -43,6 +43,7 @@ On 22nd June 2024, I gave a 10-minute lightning talk at PyRustLin meet-up in Del
 - **Reviewed:** [PR#7524](https://github.com/networkx/networkx/pull/7524) - Fixed the citation in dominance.py
 - **Reviewed:** [PR#7475](https://github.com/networkx/networkx/pull/7475) - Various improvements in information centrality
 - **Reviewed:** [PR#7514](https://github.com/networkx/networkx/pull/7514) - Prettify README.rst
+- **Reviewed:** [PR#7500](https://github.com/networkx/networkx/pull/7500) - Update NetworkX reference links in doc index
 - **Commented:** [PR#7443](https://github.com/networkx/networkx/pull/7443) - Addition of DomiRank centrality to NetworkX
 - **Raised:** [Issue #7505](https://github.com/networkx/networkx/issues/7505) - Dispatch test failing due to graph `adj` comparison for some algorithms in `expanders.py`
 - **Raised:** [Issue #7510](https://github.com/networkx/networkx/issues/7510) - Fix the docs of `strong_product`
