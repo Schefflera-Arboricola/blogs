@@ -26,7 +26,7 @@ Moving forward, I plan to seek inspiration from the sklearn or joblib projects. 
 
 ## 3. Creating a conda recipe for nx-parallel
 
-Towards the end of last week, I created a recipe PR for conda-feedstock for nx-parallel ([PR#26768](https://github.com/conda-forge/staged-recipes/pull/26768)), which addresses [Issue #65](https://github.com/networkx/nx-parallel/issues/65). This PR depends on [PR#69](https://github.com/networkx/nx-parallel/pull/69), which switches the backend build tool from hatchling to setuptools. I hope this PR will be merged by the end of this week. Once merged, I plan to locally test the workflow tests under [PR#26768](https://github.com/conda-forge/staged-recipes/pull/26768) and make it ready for review.
+Towards the end of last week, I created a recipe PR for conda-feedstock for nx-parallel ([PR#26768](https://github.com/conda-forge/staged-recipes/pull/26768)), which addresses [Issue #65](https://github.com/networkx/nx-parallel/issues/65) ([a nice reference](https://www.pyopensci.org/python-package-guide/tutorials/publish-conda-forge.html) for creating a conda-feedstock). This PR depends on [PR#69](https://github.com/networkx/nx-parallel/pull/69), which switches the backend build tool from hatchling to setuptools. I hope this PR will be merged by the end of this week. Once merged, I plan to locally test the workflow tests under [PR#26768](https://github.com/conda-forge/staged-recipes/pull/26768) and make it ready for review.
 
 ## 4. Other Activities in the Community
 
