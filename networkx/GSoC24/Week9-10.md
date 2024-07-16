@@ -22,11 +22,11 @@ Through these conversations, I gained a deeper understanding of dispatching syst
 
 Apart from this, I am yet to do most of the things I mentioned in the "Adding configs to nx-parallel" section of my last blog.
 
-## 2. Conda forge of nx-parallel
+## 2. Conda feedstock for nx-parallel
 
 The conda feedstock for `nx-parallel` was successfully created. At Mridul's request, I initiated a pull request to add him as a maintainer. During this process, one of the checks indicated that the build number needed to be updated. I proceeded to update the build number and re-rendered the PR. However, I recalled reading somewhere (while I was creating the recipe for nx-parallel) that the build number is updated when there are changes to the project's dependencies. To ensure accuracy, I reviewed the official conda-forge documentation. Following the recommended approach, I created an issue to add a maintainer and then merged the PR created by the conda-forge-bot. And I really liked how everything was automated via these bots while creating and maintaining a conda-forge package. This bot-controlled system piqued my curiosity, and I would really like to understand how these mechanisms work in detail in the future, if possible.
 
-## 2. Other Activities in the Community
+## 3. Other Activities in the Community
 
 ### Some highlights
 
