@@ -68,7 +68,7 @@ nx-parallel is a newly added parallel backend for NetworkX. This proposal goes o
 
 ### My ideal workflow
 
-![wf](../GSoC24/assests/static/a_juneja_gsoc_wf.png)
+![wf](../GSoC24/assets/static/a_juneja_gsoc_wf.png)
 
 ## 3. Experimental and more(if time permits)
 

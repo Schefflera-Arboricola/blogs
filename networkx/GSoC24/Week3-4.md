@@ -1,5 +1,5 @@
 ---
-title: "Blog2: : GSoC (nx-parallel)"
+title: "Blog2: GSoC (nx-parallel)"
 author: Aditi Juneja
 date: 2024-06-01 18:15:00 +0530
 ---
