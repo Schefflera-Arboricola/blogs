@@ -13,6 +13,7 @@ date: 2024-06-29 04:07:00 +0530
 ## 1. From the last blog
 
 I'm excited to share that two significant pull requests have been merged:
+
 - [PR#7404](https://github.com/networkx/networkx/pull/7404): Refactoring and enhancing user-facing `Backend and Configs` docs.
 - [PR#7398](https://github.com/networkx/networkx/pull/7398): Added `colliders` and `v_structures` and deprecated `compute_v_structures` in `dag.py`.
 
@@ -30,7 +31,7 @@ Towards the end of last week, I created a recipe PR for conda-feedstock for nx-p
 
 ## 4. Other Activities in the Community
 
-In the last week, we welcomed two "first-time-contributors" to NetworkX, and their PRs were merged within a few days of opening(one merged, one about to be merged). This was a  result of creating "good-first-issues" and labeling existing issues as "good-first-issues". Hopefully, they will continue to contribute in the future. Additionally, @Peiffap has been very active in the community recently, and I want to thank them for their contributions. I also quickly fixed or reported CI failures due to the new numpy 2.0 and scipy 1.14.0 releases, ensuring NetworkX's compatibility with other new releases.
+In the last week, we welcomed two "first-time-contributors" to NetworkX, and their PRs were merged within a few days of opening(one merged, one about to be merged). This was a result of creating "good-first-issues" and labeling existing issues as "good-first-issues". Hopefully, they will continue to contribute in the future. Additionally, @Peiffap has been very active in the community recently, and I want to thank them for their contributions. I also quickly fixed or reported CI failures due to the new numpy 2.0 and scipy 1.14.0 releases, ensuring NetworkX's compatibility with other new releases.
 
 On 22nd June 2024, I gave a 10-minute lightning talk at PyRustLin meet-up in Delhi. Since most of the audience was unfamiliar with the graph data structure, I explained how we create backends using `entry_points` with an example from my main library [coco](https://github.com/Schefflera-Arboricola/coco)(with a `Chocolate` class) and its backend package [parallel-coco](https://github.com/Schefflera-Arboricola/parallel-coco)(with a `ParallelChocolate` class). I think it might be a very informal version of what I have heard [`spatch`](https://github.com/scientific-python/spatch)(Scientific Python dispATCH) will be in the future. Also, I think the talk sparked a few interesting conversations about backends and open source in general, among a small group of people. And I plan to expand more on `coco` and `parallel-coco` in the future. It was a great networking opportunity!
 

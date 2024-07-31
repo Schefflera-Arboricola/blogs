@@ -32,10 +32,7 @@ The conda feedstock for `nx-parallel` was successfully created. At Mridul's requ
 
 - The talk titled - "Understanding NetworkX's API Dispatching with a parallel backend" that Erik and I submitted for EuroSciPy 2024 got accepted! Thanks to Dan for reviewing my initial talk proposal and Erik for reviewing it repeatedly as I kept updating it :)
 - Created and presented virtually my poster titled "Parallel graph algorithms and Building backends with entry_point" at SciPyCon 2024 (10th to 13th July)!
-<a href="https://github.com/Schefflera-Arboricola/Stuff/blob/main/Projects/networkx-related/aditi_juneja_nxp_scipycon24_poster.png"><img src="https://github.com/Schefflera-Arboricola/Stuff/raw/main/Projects/networkx-related/aditi_juneja_nxp_scipycon24_poster.png"></img></a>
-    - [Poster-Booth-link](https://www.airmeet.com/event/b21647f0-38b7-11ef-a03c-fd16c137ca62?booth=6689a402d4316e0dcdeba27c) - If you registered for the virtual conference, hopefully this won't break in the future.
-    - Thank you very much to Jim (Weiss-- I assume) from SciPyCon team, who very generously offered me a free virtual pass to the conference :)
-    - And lightening talks were fun :)
+  <a href="https://github.com/Schefflera-Arboricola/Stuff/blob/main/Projects/networkx-related/aditi_juneja_nxp_scipycon24_poster.png"><img src="https://github.com/Schefflera-Arboricola/Stuff/raw/main/Projects/networkx-related/aditi_juneja_nxp_scipycon24_poster.png"></img></a> - [Poster-Booth-link](https://www.airmeet.com/event/b21647f0-38b7-11ef-a03c-fd16c137ca62?booth=6689a402d4316e0dcdeba27c) - If you registered for the virtual conference, hopefully this won't break in the future. - Thank you very much to Jim (Weiss-- I assume) from SciPyCon team, who very generously offered me a free virtual pass to the conference :) - And lightening talks were fun :)
 - Became a member of the conda-forge organisation on 1st July, 2024!
 - And I passed the GSoC'24 mid-term evaluation!
 
