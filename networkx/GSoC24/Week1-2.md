@@ -45,7 +45,7 @@ But, seeing a decorator being used in nx-cugraph gave me some ideas on how I cou
 
 - for extracting additional docs and parameters from a function's docstring and adding them to the `get_info` function
 - for automatically adding the function to the `Dispatcher` class
-- and having a `name` parameter in the decorator that will let us change the name of the function at the time of dispatching, and it would resolve the naming issue we were having(ref. [PR#56](https://github.com/networkx/nx-parallel/pull/56),  [PR#32](https://github.com/networkx/nx-parallel/pull/32))
+- and having a `name` parameter in the decorator that will let us change the name of the function at the time of dispatching, and it would resolve the naming issue we were having(ref. [PR#56](https://github.com/networkx/nx-parallel/pull/56), [PR#32](https://github.com/networkx/nx-parallel/pull/32))
 - this decorator could also perform the graph conversion(from `nxp.ParallelGraph` to `nx.Graph`) that we perform in all the functions, as of now.
 - and this might also help in indicating if a function doesn't show any speedups (wrt to its sequential implementation) or if a function is proven to be impossible to parallelize.
 
@@ -69,7 +69,7 @@ And lastly, I checked if there were any updates from nx 3.3 and there were none 
 
 ## 4. Switching from `hatchling` to `setuptools`
 
-One more goal in the proposal was to switch from `hatchling` to `setuptools` as  nx-parallel is growing and maturing it’d be better to use setuptools because of its better feature support, flexibility, compatibility, and interactive capabilities as compared to Hatchling. Also, setuptools is more widely used and it's better for bigger projects and we need to explicitly mention all the packages(unlike hatchling), which ensures that all packages are being built. I switched to setuptools in [PR#67](https://github.com/networkx/nx-parallel/pull/67).
+One more goal in the proposal was to switch from `hatchling` to `setuptools` as nx-parallel is growing and maturing it’d be better to use setuptools because of its better feature support, flexibility, compatibility, and interactive capabilities as compared to Hatchling. Also, setuptools is more widely used and it's better for bigger projects and we need to explicitly mention all the packages(unlike hatchling), which ensures that all packages are being built. I switched to setuptools in [PR#67](https://github.com/networkx/nx-parallel/pull/67).
 
 ## 5. Proposal updates
 
