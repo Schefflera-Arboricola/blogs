@@ -95,6 +95,6 @@ I continued contributing to my PRs after submitting the proposal. I didn't know 
 
 [All of my involvements in networkx](https://github.com/search?q=repo%3Anetworkx%2Fnetworkx+involves%3ASchefflera-Arboricola&type=issues)!
 
-Checkout the next blog - [NetworkX Internship - Working on nx-parallel](<../IC(~Outreachy)/NetworkX-Internship-Working-on-nx-parallel.md>)!
+Checkout the next blog - [NetworkX Internship - Working on nx-parallel](../IC(~Outreachy)/NetworkX-Internship-Working-on-nx-parallel.md)!
 
 Thank you :)
