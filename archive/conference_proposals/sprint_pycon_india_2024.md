@@ -1,11 +1,13 @@
 ---
 author: Aditi Juneja
 title: "DevSprint - PyCon India 2024"
-status: "in review"
+status: "accepted"
 date: 05-09-2024
 ---
 
-[link to proposal](https://in.pycon.org/cfp/devsprint-2024/proposals/networkx-and-nx-parallel-sprint~dJ6Wl/)
+[Lightening talk slides](../PyCon_India_2024_lightening_talk_aditi_juneja.pdf)
+
+[link to updated proposal](https://in.pycon.org/cfp/devsprint-2024/proposals/networkx-and-nx-parallel-sprint~dJ6Wl/)
 
 # Title : NetworkX and nx-parallel sprint
 

@@ -5,6 +5,8 @@ status: "accepted"
 date: 27-05-2024 02:37:00 +0530
 ---
 
+[All the talk-related material](https://github.com/Schefflera-Arboricola/euroscipy2024)
+
 [link to proposal](https://pretalx.com/euroscipy-2024/talk/QLVBYY/)
 
 Similar proposals submitted at:
