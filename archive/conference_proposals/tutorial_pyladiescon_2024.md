@@ -2,7 +2,7 @@
 author: Aditi Juneja
 title: "Tutorial - PyLadiesCon 2024"
 status: "under-review"
-date: 18-10-2024 19:11:00 +0530
+date: 18-10-2024
 ---
 
 ## Title : 
