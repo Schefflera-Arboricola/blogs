@@ -1,6 +1,6 @@
 ---
 title: scikit_image_NumFOCUS_SDG_R3_2024
-status: submitted
+status: accepted
 author: Aditi Juneja
 reviewers: Tim Head, Stéfan Van Der Walt, Erik Welch, Sanket Verma, Sebastian Berg, Gregory Lee
 ---

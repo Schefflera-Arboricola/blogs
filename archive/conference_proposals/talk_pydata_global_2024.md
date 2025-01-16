@@ -1,7 +1,7 @@
 ---
 author: Aditi Juneja
 title: "Talk - PyData Global 2024"
-status: "under-review"
+status: "accepted"
 date: 14-10-2024
 ---
 
