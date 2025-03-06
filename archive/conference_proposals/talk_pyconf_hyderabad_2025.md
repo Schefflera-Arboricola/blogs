@@ -1,7 +1,7 @@
 ---
 author: Aditi Juneja
 title: "Talk - PyConf Hyderabad 2025"
-status: "submitted"
+status: "accepted"
 date: 07-01-2025
 ---
 
