@@ -7,7 +7,7 @@
 
 - **Grant Proposal**: https://github.com/Schefflera-Arboricola/blogs/blob/main/archive/grant_proposals/scikit_image_NumFOCUS_SDG_R3_2024.md
 - **Report back form link**: https://numfocus.typeform.com/to/ZC5YEN
-- **Final report**: https://github.com/Schefflera-Arboricola/blogs/blob/main/scikit-image/Dispatching(NumFOCUS_SDG_2024_R3)/final_report.md , https://hackmd.io/iky9PQtyQCO_zBbJUfEX-A?view
+- **Final report**: https://github.com/Schefflera-Arboricola/blogs/blob/main/scikit-image/Dispatching(NumFOCUS_SDG_2024_R3)/final_report.md
 
 # 1. Tell us what you achieved. (This question is required.*)
 
