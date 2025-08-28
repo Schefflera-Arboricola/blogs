@@ -1,7 +1,7 @@
 ---
 author: Aditi Juneja
 title: "Talk - PyCon India 2025"
-status: "under-review"
+status: "rejected"
 date: 18-05-2025
 ---
 
