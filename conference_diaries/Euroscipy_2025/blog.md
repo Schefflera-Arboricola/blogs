@@ -4,7 +4,7 @@
 
 - Napari tutorial was nice— also contributed a little during sprints to napari and I was just going through the documentation and talking with maintainers, etc.
 
-### Rough notes from napari sprints 
+### Rough notes from napari tutorial 
 
 - in console: `viewer.layers['blobs'].data = threshold(viewer.layers["image"].data,threshold=0.2)`
 - ```python
@@ -124,46 +124,48 @@
 ## Day 3 and 4: Talks
 
 - Keynotes were nice :)
-    - Keynote 1 notes:
-        - jupiter: first exascale computer (part of GSC alliance -- 3 national supercomputing centres in germany : HLRS(Stuttgart), LRZ(Garching), JSC(Julich)).
-        - Things to do while listing jobs to attract more people from URGs: 
-            - avoid long list of requirements
-            - highlight all sides/benefits of the job
-        - Who opened the new Bengalore WHPC chapter?
-        - Super(computing)heroes sessions at ISC24, SC24, ISC25, SC25
-        - JuWinHPC blogs
-        - https://womeninhpc.org/community/jobs
-        - Gender dimension in AI event; wikipedia write'athon (increasing female visibility)
-        - JuLab, MaTSE
-            <p align="center">
-        <img src="../Euroscipy_2025/assets/static/keynotes/keynote1_ss.png" alt="ss-Engaging with the next generation slide -- Slide with bullet points describing Forschungszentrum Jülich’s initiatives: JuLab (a lab for pupils), JSC’s combined bachelor and apprenticeship program in applied mathematics and computer science (MaTSE), and support for JuLab, MaTSE, and FZJ’s recruiting team to promote diversity in IT and HPC. Examples listed: taking female interns for lunch discussions, giving guided tours of the supercomputing center, and supporting career events by/at FZJ." width="70%"/>
-        </p>
-    
-    - second keynote notes: 
-        - https://www.youtube.com/live/AGdrXUwAGfs?si=Udm443lqF0Li9M2i
-        - nice overview of scientific open-source ecosystem and how it has evolved :)
-        - scientific problem solving steps
-            <p align="center">
-        <img src="../Euroscipy_2025/assets/static/keynotes/keynote2_ss_solving_sci_problems.png" alt="Diagram of the scientific problem-solving workflow shown as a winding path with icons. Stages include: Domain Problem and Scope (triangle warning icon), Data Understanding (magnifying glass over a chart), Data Preparation (filter funnel with documents), Modeling (network diagram), Evaluation (checklist clipboard), and Production Results (rocket launch)." width="70%"/>
-        </p>
 
-        - creating scientific software
-            <p align="center">
+### Keynote 1 notes:
+        
+- jupiter: first exascale computer (part of GSC alliance -- 3 national supercomputing centres in germany : HLRS(Stuttgart), LRZ(Garching), JSC(Julich)).
+- Things to do while listing jobs to attract more people from URGs: 
+    - avoid long list of requirements
+    - highlight all sides/benefits of the job
+- Who opened the new Bengalore WHPC chapter?
+- Super(computing)heroes sessions at ISC24, SC24, ISC25, SC25
+- JuWinHPC blogs
+- https://womeninhpc.org/community/jobs
+- Gender dimension in AI event; wikipedia write'athon (increasing female visibility)
+- JuLab, MaTSE
+  <p align="center">
+        <img src="../Euroscipy_2025/assets/static/keynotes/keynote1_ss.png" alt="ss-Engaging with the next generation slide -- Slide with bullet points describing Forschungszentrum Jülich’s initiatives: JuLab (a lab for pupils), JSC’s combined bachelor and apprenticeship program in applied mathematics and computer science (MaTSE), and support for JuLab, MaTSE, and FZJ’s recruiting team to promote diversity in IT and HPC. Examples listed: taking female interns for lunch discussions, giving guided tours of the supercomputing center, and supporting career events by/at FZJ." width="70%"/>
+  </p>
+    
+### Keynote 2 notes: 
+
+- https://www.youtube.com/live/AGdrXUwAGfs?si=Udm443lqF0Li9M2i
+- nice overview of scientific open-source ecosystem and how it has evolved :)
+- scientific problem solving steps
+  <p align="center">
+    <img src="../Euroscipy_2025/assets/static/keynotes/keynote2_ss_solving_sci_problems.png" alt="Diagram of the scientific problem-solving workflow shown as a winding path with icons. Stages include: Domain Problem and Scope (triangle warning icon), Data Understanding (magnifying glass over a chart), Data Preparation (filter funnel with documents), Modeling (network diagram), Evaluation (checklist clipboard), and Production Results (rocket launch)." width="70%"/>
+    </p>
+- creating scientific software
+  <p align="center">
         <img src="../Euroscipy_2025/assets/static/keynotes/keynote2_ss.png" alt="A slide listing key software engineering concerns including: “Numerical Accuracy” (algorithms, error propagation), “Testing” (unit, integration, benchmarking, regression), “Resource Optimization” (profiling, caching, hardware), “DRY Code” (APIs, concern separation, modular code), “Platform Independence,” and “Maintainability” (code quality, dependency management, CI, documentation)." width="70%"/>
         </p>
-
-        - Python Interpreter's working
-            <p align="center">
+- Python Interpreter's working
+  <p align="center">
         <img src="../Euroscipy_2025/assets/static/keynotes/keynote2_ss_python_interpreter.png" alt="A diagram showing the internal structure of the Python interpreter: a .py file feeds into the Python Interpreter, which includes “Byte Code” and a “Virtual Machine,” with an external CAPI connection to other blocks, all set on a blue grid background with gear and binary code icons." width="50%"/>
         </p>
-
-        - GDAL - lots of geospatial formats
-        - 
-            <p align="center">
+- GDAL - lots of geospatial formats
+- 
+  <p align="center">
         <img src="../Euroscipy_2025/assets/static/keynotes/keynote2_ss_overview.png" alt="Slide titled ‘Fellowship Forged’ with a fantasy-style sword and books illustration. Four sections describe elements of software development: Language and package distribution (infrastructure for Python language and packages), IDE (tools like Jupyter, Spyder, VS Code, PyCharm), Framework and architecture (environment managers like pixi, Pipenv, uv), and links to Environment standard and artifacts (.yml files for sharing environments) and Build process and maintenance (long-term software development, deployment, and maintenance)." width="80%"/>
         </p>
+- nice slides!
 
-        - nice slides!
+### More nice talks, people and work
+
 - "Maintaining people not just projects" maintainer session by Kai was nice— liked the discussions it started! 
 - Mridul's talk was nice-- about units and how they are important and the whole ecosystem of units and stuff
 - Then just worked on my slides-- dispatching talk:
