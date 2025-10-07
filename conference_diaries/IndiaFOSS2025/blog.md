@@ -126,7 +126,12 @@ Nice talks!
     - https://cfl.in/
     - https://github.com/anandology/stringart-templates/blob/main/main.py
 
-- Ishaan let me draw stuff at his Inkscape booth :)
+- Ishaan let me draw stuff at his booth :) Later I also tried Inkscape myself to make this colorful version of the networkx logo:
+
+    <p align="center">
+            <img src="./assets/static/nx_inkscape_colorful_logo.png" alt="" width="50%"/>
+    </p>
+
 - scan code, gardener booths, dwani, story telling booths
     - https://dwani.ai/
     - https://en.m.wikipedia.org/wiki/SAP_ERP
