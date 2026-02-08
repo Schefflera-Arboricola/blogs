@@ -11,6 +11,44 @@
 
 # 1. Tell us what you achieved. (This question is required.*)
 
+# Short form
+
+Aditi Juneja worked as a NumFOCUS Independent Contractor (Nov 28, 2024–Mar 19, 2025) on scikit-image's backend dispatching mechanism, under PI Stéfan van der Walt. During the contract, she extensively reviewed [PR#7520](https://github.com/scikit-image/scikit-image/pull/7520), worked on [PR#7727](https://github.com/scikit-image/scikit-image/pull/7727), started/led discussions on issues- [#829](https://github.com/rapidsai/cucim/issues/829), [#7738](https://github.com/scikit-image/scikit-image/issues/7738) and [#7550](https://github.com/scikit-image/scikit-image/issues/7550), and handled community coordination and maintenance.
+
+Diagrams summarising dispatching infrastructure so far: https://drive.google.com/file/d/1xHLs6rK1P1XGt83ueL-DUbPO-dF0ZKFQ/view?usp=sharing (open with `draw.io`)
+
+## Dispatching (161 hrs)
+The entry-point based dispatching introduced in PR#7513, extending PR#7466, with a `skimage.backends` ep pointing to a namespace of alternative implementations supported by the backend. PR#7520 built on this with:
+
+- `SKIMAGE_NO_DISPATCHING` env var (concern: dispatching enabled by default)
+- Alphabetical backend priority (concern: no user control over backend selection or priority)
+- `skimage_backends` entry-point for pre-checks(`can_has`) and implementation loading(`get_implementation`)
+- `skimage_backend_infos` ep for listing of all the `supported_functions` and for storing metadata. `DispatchNotification` for logging. (alternate approach in discussions: separating utility modules in heavy ep (`get_implementation`) and lightweight ep (`supported_functions` and `can_has`))
+- Developer guide: https://scikit-image.org/docs/dev/development/dispatching.html
+
+PR#7727 addressed the points mentioned above and adds some more functionality:
+- `SKIMAGE_NO_DISPATCHING` → `SKIMAGE_DISPATCHING`(dispatching off by default)
+- Introduced `SKIMAGE_BACKEND_PRIORITY` for explicit backend ordering by user; overrides default alphabetic priority of backends
+- Introduced `skimage.set_backends()` context manager for more user-control:
+```python
+skimage.set_backends("backend1,backend2", dispatch=True)
+```
+- Added user guide: https://github.com/Schefflera-Arboricola/scikit-image/blob/patch-1/doc/source/user_guide/backends.rst
+
+## Community Coordination (50 hrs)
+- cuCIM #829: NumPy/CuPy support, type checks/conversions (scikit-image vs. backend roles)
+- Coordinated cross-project meetings (scikit-image/NetworkX/NumPy/scikit-learn)
+- Started discussions on #dispatching thread in SP Discord
+
+## Maintenance (39 hrs)
+- Merged: Deconvolution example(#7589, #7564); `_regionprops_utils` doc(#7741); CI pre-commit(#7631)
+- Ready: `morphology/isotropic.py` bool dtype checks(#7748)
+- WIP: `label_image` rename + `rename_parameter` decorator(#7747)
+- Issue: show_rag unused var(#7698)
+- Reviewed: Free-threaded Python tests(#7678)
+
+# Long form
+
 ## Introduction
 
 The scikit-image project received a $10,000 grant through NumFOCUS’s Small Development Grant program (Round 3, 2024) to support the initial development of a dispatching mechanism, that would enable function calls in scikit-image to be routed to an alternative and a faster backend implementations, such as cuCIM.
@@ -103,7 +141,7 @@ Three main concerns were raised during this stage:
 
 1. Instead of relying on the alphabetical fallback priority, it would have been nicer to let the user set their preferred backend/backend priority. (later implemented in [PR#7727](https://github.com/scikit-image/scikit-image/pull/7727))
 2. Dispatching being off by default is advisable because enabling it by default could lead to unexpected results. A malicious package might be backend or the returned values might vary in precision levels. Although logging is in place, users might have logging disabled, further increasing confusion/risk. Since this feature is currently experimental, it is safer to require users to explicitly enable it. (later implemented in [PR#7727](https://github.com/scikit-image/scikit-image/pull/7727))
-3. To optimise the dispatching workflow and minimise unnecessary overhead, it is best to load only the initial checks—such as `supported_functions` and `can_run`-- at the start, deferring the import of the full backend implementation (`get_implementation`) until it is actually needed. Hence, `can_ru`n and `info` could be combined into one lightweight entry-point, while the full backend implementations could be loaded from a separate entry-point later. This separation also clearly signals that `can_run` should perform a quick, efficient check without importing heavy code or the backend itself. It also encourages backend developers to keep this check fast and simple, preventing slowdowns in the entire workflow for users– even when a backend is installed but not actively used. Although this approach was not extensively discussed due to limited review time, and the current implementation was considered acceptable for an initial dispatching setup, by the community.
+3. To optimise the dispatching workflow and minimise unnecessary overhead, it is best to load only the initial checks—such as `supported_functions` and `can_run`-- at the start, deferring the import of the full backend implementation (`get_implementation`) until it is actually needed. Hence, `can_run` and `info` could be combined into one lightweight entry-point, while the full backend implementations could be loaded from a separate entry-point later. This separation also clearly signals that `can_run` should perform a quick, efficient check without importing heavy code or the backend itself. It also encourages backend developers to keep this check fast and simple, preventing slowdowns in the entire workflow for users– even when a backend is installed but not actively used. Although this approach was not extensively discussed due to limited review time, and the current implementation was considered acceptable for an initial dispatching setup, by the community.
 
 
 ### Continued development: PR7727
@@ -170,34 +208,8 @@ In addition to dispatching-related work, I contributed to general maintenance an
     - 200 hrs on technical work
         - 161 hours on dispatching work
         - 39 hours on scikit-image general work
-    - 50 hrs on technical coordinated
+    - 50 hrs on technical coordination
 
-### Future goals:
-
-- Short-term (scikit-image oriented):
-    - Iterate over [PR#7727](https://github.com/scikit-image/scikit-image/pull/7727).
-    - Add `@dispatchable` decorator to more algorithms in scikit-image ([PR#7723](https://github.com/scikit-image/scikit-image/pull/7723)).
-    - Continue coordination with the cuCIM team to get cuCIM working as a backend ([Issue#829](https://github.com/rapidsai/cucim/issues/829)).
-    - Ongoing discussions in [Issue#7738](https://github.com/scikit-image/scikit-image/issues/7738) on **array conversions and backend testing**, including:
-        - Backend testing and compliance: Backend results may differ slightly (in precision or exact values) from scikit-image’s implementations. Determining compliance with the scikit-image test suite may require making tests array-agnostic, so they can run across different array types.
-        - Challenges of array conversion: Unlike graphs in NetworkX, arrays are costly to convert. Conversion functions provided by backends are possible but may be inefficient.
-        - Potential approaches:
-            - Using a variant of `numpy.ndarray` that also stores backend metadata (e.g., the name `"cucim"`).
-            - Naming entry-points after their primary array type (e.g., `skimage-cupy`) while still allowing secondary types or conversion rules.
-    - Explore approaches for including backend-specific documentation in the official scikit-image docs ([Issue#7550](https://github.com/scikit-image/scikit-image/issues/7550)).
-- Long-term(scientific python ecosystem oriented):
-    - Engaging with users to gather feedback on dispatching functionality's user API. (like, I briefly covered scikit-image's dispatching and dispatching in other projects like sklearn and NumPy during the PyConf Hyderabad 2025 talk. FYI, this talk(and conference's travel/lodging) was not covered by this SDGrant.)
-    - Standardising dispatching in the ecosystem: Contributing more to `spatch` and SPEC 2 on API Dispatching, aligning scikit-image's dispatching efforts with broader Scientific Python ecosystem goals.
-
-## Conclusions
-
-This grant successfully laid the foundation for a dispatching mechanism in scikit-image, establishing the first version of a backend infrastructure and initiating discussions on design trade-offs between entry-point–based and type-based approaches. The work carried out—through PRs [#7513](https://github.com/scikit-image/scikit-image/pull/7513), [#7520](https://github.com/scikit-image/scikit-image/pull/7520), and [#7727](https://github.com/scikit-image/scikit-image/pull/7727)-- introduced a configurable dispatching framework, improved documentation, and provided a basis for future backend integration (e.g., with cuCIM - [Issue829](https://github.com/rapidsai/cucim/issues/829)).
-
-The project also provided an opportunity to survey dispatching strategies across the wider Scientific Python ecosystem. While projects such as NetworkX, Dask, matplotlib, napari, and pytest plugins use entry-point–based mechanisms to enable extensibility or delegate functionality to alternative implementations in a backend library, NumPy employs type based dispatching, and projects like SciPy and scikit-learn adopted the Array API standards. Similar standardisation efforts are also being made for dataframe libraries (see [narwhals](https://github.com/narwhals-dev/narwhals)). Other libraries such as joblib support specific parallel backends through hard-coded pathways. Scikit-image’s approach– combining aspects of both type-based and name-based dispatching– reflects its unique position as a Cython-heavy, array-consuming library.
-
-Looking forward, aligning these developments with community efforts such as `spatch` and SPEC 2 on API Dispatching will be essential to converge on shared standards and best practices across the ecosystem.
-
-Finally, thanks to all the contributors and reviewers for their time, insights, and thoughtful discussions. This work was only possible through collective input, and the initial dispatching infrastructure established during this grant has hopefully provided a good starting point for future progress on dispatching in scikit-image and the broader Scientific Python ecosystem.
 
 ---
 
@@ -205,10 +217,12 @@ Finally, thanks to all the contributors and reviewers for their time, insights, 
 # 2. We’re curious about the trajectories these projects typically take. How did what you accomplished differ from what you originally proposed? Did you hit any roadblocks? If so, what were they? (This question is required.*)
 
 The original grant proposal focused solely on implementing a dispatching mechanism in scikit-image. However, as the project progressed, several unforeseen factors influenced the trajectory of the work:
-- **Review Bottlenecks and Shifting Focus to General Maintenance:** While several dispatching-related PRs were opened and iterated upon, their progress was constrained by the availability of core developers for reviews. To help core developers get more time to review dispatching-related PRs, I started contributing towards the higher-priority [skimage2]( https://github.com/scikit-image/scikit-image/wiki/API-changes-for-skimage2) project, along with general maintenance tasks. 
+
+- **Review Bottlenecks and Shifting Focus to General Maintenance:** While several dispatching-related PRs were opened and iterated upon, their progress was constrained by the availability of core developers for reviews. To help core developers get more time to review dispatching-related PRs, PI suggested to contributed towards the higher-priority [skimage2]( https://github.com/scikit-image/scikit-image/wiki/API-changes-for-skimage2) project and general maintenance instead, so I shifted focus there. 
 - **Community and Stakeholders Coordination Challenges:** More consistent engagement from the cuCIM side was anticipated, particularly around API design considerations for backend developers and users. Initial cross-project meetings (involving people from scikit-image, networkx, numpy, and scikit-learn) were productive and helped get the first dispatching PR merged. However, further discussions, without much cuCIM's involvement, particularly around API design, became less effective over time and often concluded without clear action items at hand. To support any future interest from cuCIM, [Issue#829](https://github.com/rapidsai/cucim/issues/829) documents detailed instructions on how to integrate cuCIM as a scikit-image backend and outlines the current state of the dispatching infrastructure in scikit-image for developers' reference.
 
 Despite these challenges, the core goal of setting up an initial dispatching framework was achieved, and the groundwork has been laid for further development. 
+
 
 ---
 
@@ -223,11 +237,31 @@ Be aware of the project’s priorities and resources, and have open communicatio
 
 # 4. Anything else you'd like to share with us about your experience with the small grant?
 
-This grant provided a great opportunity to work on a technically challenging feature in the scikit-image project. It also highlighted the importance of community-driven development, where progress depends not just on individual contributions but also on coordination with a broader ecosystem.
+## Future goals
 
-One of the key takeaways was observing how the different Scientific Python projects require dispatching and backend selection and realizing the potential for cross-library coordination and improvements. I think the discussions and collaborations initiated during this project will continue beyond the grant period, shaping the future of dispatching in scikit-image and beyond.
+- Short-term (scikit-image oriented):
+    - Iterate over [PR#7727](https://github.com/scikit-image/scikit-image/pull/7727).
+    - Add `@dispatchable` decorator to more algorithms in scikit-image ([PR#7723](https://github.com/scikit-image/scikit-image/pull/7723)).
+    - Continue coordination with the cuCIM team to get cuCIM working as a backend ([Issue#829](https://github.com/rapidsai/cucim/issues/829)).
+    - Ongoing discussions in [Issue#7738](https://github.com/scikit-image/scikit-image/issues/7738) on **array conversions and backend testing**, including:
+        - Backend testing and compliance: Backend results may differ slightly (in precision or exact values) from scikit-image’s implementations. Determining compliance with the scikit-image test suite may require making tests array-agnostic, so they can run across different array types.
+        - Challenges of array conversion: Unlike graphs in NetworkX, arrays are costly to convert. Conversion functions provided by backends are possible but may be inefficient.
+        - Potential approaches:
+            - Using a variant of `numpy.ndarray` that also stores backend metadata (e.g., the name `"cucim"`).
+            - Naming entry-points after their primary array type (e.g., `skimage-cupy`) while still allowing secondary types or conversion rules.
+    - Explore approaches for including backend-specific documentation in the official scikit-image docs ([Issue#7550](https://github.com/scikit-image/scikit-image/issues/7550)).
 
-Overall, I am truly grateful for the support from NumFOCUS in funding this work, and I look forward to continuing my involvement in the community!
+- Long-term(Scientific Python ecosystem oriented):
+    - Engaging with users to gather feedback on dispatching functionality's user API. I covered scikit-image's dispatching and dispatching in other scientific projects at various conferences like PyConf Hyderabad 2025, RootConf 2025, EuroSciPy 2025, IndiaFOSS 2025 and PyHEP 2025 which led to interesting discussions. Note that these talks(and conference's travel/lodging) was not covered by this SDGrant.
+    - Standardising dispatching in the ecosystem: Contributing more to `spatch` and SPEC 2 on API Dispatching, aligning scikit-image's dispatching efforts with broader Scientific Python ecosystem goals.
 
+## Conclusion
+
+This grant laid the foundation for scikit-image's dispatching mechanism by establishing its first backend infrastructure through PRs [#7513](https://github.com/scikit-image/scikit-image/pull/7513), [#7520](https://github.com/scikit-image/scikit-image/pull/7520), and [#7727](https://github.com/scikit-image/scikit-image/pull/7727). These contributions introduced a configurable framework blending entry-point–based and type-based dispatching, detailed documentation, tests and paved the way for backend integrations like cuCIM ([Issue829](https://github.com/rapidsai/cucim/issues/829)).
+
+This project provided a great opportunity to work on a technically challenging feature in the scikit-image project while carrying out a cross-project collaboration. A key insight was surveying different dispatching approaches adopted by different Scientific Python projects: libraries like NetworkX, Dask, matplotlib, napari, and pytest plugins rely on entry-points for extensibility or for dispatching to an alternative implementations; NumPy provides type-based dispatching for supporting different array types; SciPy and scikit-learn follow the Array API standards; dataframe tools pursue similar efforts via [narwhals](https://github.com/narwhals-dev/narwhals); and projects like joblib and [vector](https://github.com/scikit-hep/vector) employs hard-coded backends. Scikit-image's hybrid approach suits its Cython-heavy, array-consuming nature, sparking discussions on design trade-offs (entry-point Vs array-type-based dispatching) which will hopefully contribute towards shaping the future progress on dispatching in scikit-image and the broader Scientific Python ecosystem, through projects like [`spatch`](https://github.com/scientific-python/spatch) and [SPEC 2](https://scientific-python.org/specs/spec-0002/).
+
+Lastly, I'm truly grateful to NumFOCUS for funding this work, and to all the contributors and reviewers for their contributions, insights and time.
 
 ---
+
