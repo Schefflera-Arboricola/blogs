@@ -4,7 +4,7 @@ This repository includes:
 - Project Work, Blogs, and Reports
     - [scikit-image](https://github.com/scikit-image)
         - [NumFOCUS SDG 2024 (Round 3)](https://github.com/Schefflera-Arboricola/blogs/tree/nf-sdg_report/scikit-image/Dispatching%28NumFOCUS_SDG_2024_R3%29) 
-            - [Final report](https://github.com/Schefflera-Arboricola/blogs/blob/nf-sdg_report/scikit-image/Dispatching(NumFOCUS_SDG_2024_R3)/final_report.md)
+            - [Final report](https://github.com/Schefflera-Arboricola/blogs/blob/main/scikit-image/Dispatching(NumFOCUS_SDG_2024_R3)/final_report.md)
             - [Initial proposal](https://github.com/Schefflera-Arboricola/blogs/blob/main/archive/grant_proposals/scikit_image_NumFOCUS_SDG_R3_2024.md)
     - [NetworkX](https://github.com/networkx)
         - [Google Summer of Code 2024](/networkx/GSoC24)
