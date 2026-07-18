@@ -1,5 +1,68 @@
 Notes : https://hackmd.io/@Schefflera-Arboricola/H1Gvmv5zGg/edit
 
+# 14th July, 2026 (05:30pm IST, 9:00am BRT)
+
+**Attendees**: Aditi, Agriya, Melissa
+
+## Agenda
+
+- Updates from the last meeting date till today:
+    - Understanding sphinx-process-graph
+        - build_main --> takes in the sphinx_graph.toml and generates the .svg graph of the build process
+        - captures: objects, events, transforms, post_transforms ([here](https://github.com/chrisjsewell/sphinx-process-graph/blob/main/src/sphinx_graph/__init__.py))
+            - Are there any more things to capture? Probably yes -- I think the get_info.py only captures the initialisation not the build
+            - Where does the build process steps and objects come from : opened https://github.com/chrisjsewell/sphinx-process-graph/issues/1 -- maybe it’s hand-coded but would wait for @chrisjsewell ’s reply -- [Melissa] might take too long to reply
+            - [Agriya] reproduce the build process graph with newer versions of sphinx (9._) and .toml is probably hand written
+        - Spent time understanding transforms, post_transforms and the different kinds of transforms, parsing, etc: https://www.sphinx-doc.org/en/master/extdev/utils.html#sphinx.transforms.SphinxTransform 
+    - Briefly reviewed the following:
+        - https://github.com/useblocks/sphinx-performance:
+            - `--sphinx-events` option of sphinx-analysis might be of our use.
+        - https://www.sphinx-doc.org/en/master/extdev/event_callbacks.html -- using sphinx classes/objects to create a build pipeline
+    - Work updates PR: https://github.com/Schefflera-Arboricola/blogs/pull/3
+
+### Important material to go through:
+
+- sphinx docs
+    - https://www.sphinx-doc.org/en/master/extdev/index.html
+    - https://www.sphinx-doc.org/en/master/extdev/event_callbacks.html#core-event-details
+    - https://www.sphinx-doc.org/en/master/usage/extensions/index.html
+    - https://www.sphinx-doc.org/en/master/development/index.html
+- easy extension to understand the extension mechanism: https://www.sphinx-doc.org/en/master/usage/extensions/todo.html
+
+- another small and simple sphinx extension : https://github.com/pybamm-team/PyBaMM/blob/main/docs/sphinxext/inheritance_diagram.py (uses `lines.append()` to add a diagram) 
+    - simple setup() function 
+        - `app.connect("autodoc-process-docstring", add_diagram)` --> overrides the autodoc-process-docstring event/entry-point with the custom add_diagram function
+        - `"parallel_read_safe": True, "parallel_write_safe": True,` --> safe to run this extension during read and write phases
+
+- [Agriya] sphinx graph on events docs page is not as detailed as sphinx-process-graph
+
+- [Melissa] monkey patching sphinx internals in scipy: https://github.com/scipy/scipy/pull/22836/changes#diff-d8d3ed25802824d15bf411f8e97416d8fc6f9247e821b0617f2b869dc584b99c
+    - `sphinx.ext.autosummary.generate.generate_autosummary_docs = (custom_generate_autosummary_docs)` (line 824) --> overriding a aphinx function
+    - `app.add_directive("autosummary", InheritanceAwareAutosummary, override=True)` --> adding a custom class `InheritanceAwareAutosummary`
+
+- [Agriya - idea] small meta extension; adds a decorator on all sphinx classes -- the decorator will track the time while the event is running
+
+- https://github.com/sphinx-doc/sphinx/tree/master/sphinx/ext
+    - sphinx-gallery - take a look at it to understand extensions (gen_gallery.py -- setup() function)
+
+- [Melissa] Custom directive example: https://github.com/scipy/scipy/blob/75aedcaae44102a9abaeba389cf3a0f87ff4f61f/doc/source/conf.py#L526
+    - `LegacyDirective` 
+    - example: https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html#scipy.interpolate.interp1d
+    - docs: https://docs.scipy.org/doc/scipy/dev/contributor/rendering_documentation.html#legacy-directive
+
+- https://github.com/sphinx-contrib/ - collection of sphinx extensions
+
+- directive Vs extension - extensions are more complex and complicated and usually outside sphinx; directives are placeholders like `.. plot`, `.. image`, etc.
+
+- [Agriya] analogy between the sphinx docs build and the overall project's build/compilation
+    - https://github.com/carreau/sphinx_toml --> having some structure in a .toml file-- this can also make the benchmarking easier!
+    - for dynamically setting/creating custom configs: conf.py <--> setup.py 
+    - for static configs: sphinx.toml (implemented in above project) <--> pyproject.toml
+
+
+---
+
+
 # ~~7th~~ 9th July, 2026 (07:30pm IST, 11:00am BRT)
 
 **Attendees**: Aditi, Agriya, Melissa
