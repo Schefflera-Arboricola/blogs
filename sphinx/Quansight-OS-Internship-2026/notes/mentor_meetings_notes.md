@@ -1,5 +1,75 @@
 Notes : https://hackmd.io/@Schefflera-Arboricola/H1Gvmv5zGg/edit
 
+# 23rd July, 2026 (05:30pm IST, 9:00am BRT)
+
+**Attendees**: Aditi, Melissa
+
+## Agenda
+
+### Updates:
+
+- Trying to resolve issue [sphinx-doc/sphinx#14532](https://github.com/sphinx-doc/sphinx/issues/14532)
+    - Got familiar with the sphinx codebase (signature handling and parsing pipelines, resolvers, how Sphinx's different domains(Python, C++, Java, etc.) processes signatures, tokenizing, and the autodoc extension, etc. 
+    - For more see [notes](https://github.com/Schefflera-Arboricola/blogs/blob/qs-sphinx/sphinx/Quansight-OS-Internship-2026/notes/personal_rough_notes/dataclass-signature-issue-notes.md)
+- Continued learning Sphinx internals-- the extension mechanism via the todo extension
+- Experimenting and understanding the extension API with a dummy extension
+- PoC: https://github.com/Schefflera-Arboricola/benchmark-sphinx-phase-wise
+
+---
+### Discussion notes
+
+- overriding sphinx logger to add timestamps to the logging msg: https://www.sphinx-doc.org/en/master/extdev/logging.html
+- https://www.sphinx-doc.org/en/master/extdev/event_callbacks.html
+- custom sphinx extension/overriden code: https://github.com/matplotlib/matplotlib/tree/main/doc/sphinxext
+    - issue: most of the logging messages in the above files are warnings..
+- https://github.com/executablebooks/MyST-NB/blob/main/myst_nb/core/loggers.py 
+    - MyST parser: https://github.com/executablebooks/MyST-Parser/blob/master/myst_parser/sphinx_ext/main.py
+    - [Melissa] avoid using docutils for getting more deeper level of logging, unless really necessary-- doesn't have very good documentation. (sphinx is basically a wrapper around docutils)
+- extension by Melissa that filters out logging messages
+    - link: 
+    - autosummary doesn't allow one object to be listed twice in a summary table(gives a warning about duplicate reference) -- to filter out such warnings-- as the author knows it is the intended behaviour and not a warning
+- toml - works for now; don't know if this is the best way-- if the user wants to get all subphases? then using some inspection in the `app`, `env`, etc. object might help to know what events and what phase or sub-phase we are in..
+-  custom extensions might not have 
+
+
+### ToDos:
+
+- sphinx's logger api override to add timestamps
+- extension mechanism - make this as a sphinx extension for phasse-wise benchmarking
+- logging messages -- phase-wise -- how to sort those? matching phases?
+- try using the PoC with matplotlib and other projects.
+- focus on next to next week -- sub-phase benchmarking:
+    - how to get events from the `app.` object?
+        - we will have to check for events at multiple stages during the build process bcoz some extensions create new events 
+
+---
+
+- [Melissa] concern: overhead of adding timestamps and the extention itself might add a lot of noise to benchmarking result or make them not useful.
+- aim for the coming week: 3-4 projects (numpy, scipy, matplotlib, and any smaller projects- statsmodels) -- 5 main phases' benchmarking
+
+
+---
+
+
+# 21st July, 2026 (05:30pm IST, 9:00am BRT)
+
+**Attendees**: Aditi (only one attendee -- meeting postponed)
+
+## Agenda
+
+### Updates:
+
+- Trying to resolve issue sphinx-doc/sphinx#14532
+    - Got familiar with the sphinx codebase (signature handling and parsing pipelines, resolvers, how Sphinx's different domains(Python, C++, Java, etc.) processes signatures, tokenizing, and the autodoc extension, etc. 
+    - For more see [notes](https://github.com/Schefflera-Arboricola/blogs/blob/qs-sphinx/sphinx/Quansight-OS-Internship-2026/notes/personal_rough_notes/dataclass-signature-issue-notes.md)
+- Continued learning Sphinx internals-- the extension mechanism via the todo extension
+- Experimenting and understanding the extension API with a dummy extension
+- plan for the coming few days of this week: using sphinx logging messages(with timestamps- `ts`) to produce benchmarks
+
+
+---
+
+
 # 14th July, 2026 (05:30pm IST, 9:00am BRT)
 
 **Attendees**: Aditi, Agriya, Melissa
