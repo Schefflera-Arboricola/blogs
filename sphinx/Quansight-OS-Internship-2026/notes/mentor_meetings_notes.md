@@ -1,5 +1,50 @@
 Notes : https://hackmd.io/@Schefflera-Arboricola/H1Gvmv5zGg/edit
 
+# 28th July, 2026 (05:30pm IST, 9:00am BRT)
+
+**Attendees**: Aditi, Melissa, Agriya
+
+## Agenda
+
+### Updates:
+
+- 2 approaches:
+    - timestampped verbose logs
+        - issue: if the extension doesn't have alot of logging messages or if they are not printed in the standard output-- e.g. jupyterlite sphinx extension running in quiet mode gives 1-2 log messages
+    - adding hooks to sphinx events and adding perf_counter to record the time of each phase
+        - how will this expand with extensions?
+        - [Agriya] better than the above approach
+
+- output a `.log` or `.html` file instead of printing in terminal, bcoz printing takes more time. Use AI for styling, etc.(flamegraph, heatmaps, etc.). Right now, don't focus on the styling too much.
+- matplotlib with current timestampped verbose logs approach ([Melissa] Doesn't look too crazy to me):
+
+```
+=== Main Phase Benchmarks ===
+
+Initialization        443.825 s
+Reading               233.482 s
+Consistency             0.051 s
+Resolving               3.702 s
+Writing               182.212 s
+```
+
+- try with NumPy docs: it has more cross-references so should see more time in the resolving phase
+
+- another interesting project:
+    - could be taken on later in the internship
+    - having a nominal project benchmarked with a basic set of extensions and then see how the build time scales as the different variables (like, number of pages, cross references, etc.) scale.
+    - maybe we would be able to figure out some meaningful optimisations through the result of the above experiment.
+    - running sphinx against sphinx
+
+### ToDo:
+
+- Basic benchmarking tool as a sphinx extension that outputs a simple 5 phase benchmarks
+- then we will look into sub-phase level benchmarking
+
+
+---
+
+
 # 23rd July, 2026 (05:30pm IST, 9:00am BRT)
 
 **Attendees**: Aditi, Melissa
