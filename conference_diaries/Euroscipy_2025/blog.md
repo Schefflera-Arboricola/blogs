@@ -1,3 +1,10 @@
+---
+title: "EuroSciPy 2025"
+author: Aditi Juneja
+date: 
+status: draft
+---
+
 # [WIP] EuroSciPy 2025 blog/notes
 
 ## Day 1 and 2: Tutorials
