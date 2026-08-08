@@ -3,7 +3,7 @@
 ### What went well this week? ✨
 
 - Implemented event-wise benchmarking: https://github.com/Schefflera-Arboricola/benchmark-sphinx-phase-wise/pull/2
-- Benchmarked matplatlib, numpy and networkx; key observations:
+- Benchmarked matplotlib, numpy and networkx; key observations:
     - `config-inited` takes close to 50% of build time in Matplotlib and NetworkX, largely due to the Sphinx-Gallery extension.
     - `doctree-resolved` is the most time-consuming event in NumPy, primarily due to resolving and cross-referencing during the writing phase.
 - Experimented with visualising benchmark results as a directed graph using gprof2dot (thought of doing something like this in week 1). This approach was good for exploration, but i think this probably won't be the best format for presenting the final benchmarking results. See the graph visualisation [here](../notes/assets/static/event_graph.png).
