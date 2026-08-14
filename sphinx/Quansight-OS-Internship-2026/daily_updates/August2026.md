@@ -1,3 +1,29 @@
+## Week of Aug 10 - Aug 14
+
+### What went well this week? ✨
+
+- Extended the Sphinx build profiler/benchmarking tool to break down timings at the handler and extension level, not just per-event-- so we can now see exactly which extension/handler is responsible for time spent in a given build event. Details on the approach (and its current limitations) are in the PR description: https://github.com/Schefflera-Arboricola/benchmark-sphinx-phase-wise/pull/3
+- Spent significant time inspecting the benchmark accuracy itself -- tracing through the build lifecycle to catch gaps between what we were measuring and actual wall-clock time, so the durations reported can be trusted.
+
+### What do you want to achieve/complete next week? ✅
+
+- Close the remaining gaps so every component of the build process is accounted for and is reflected in the benchmarks
+- Add test coverage for the profiling extension
+- Investigate making the extension parallel-read/write safe
+- Turn this into a CLI tool
+
+### If only one deliverable/project could get done this week what would it be? 🚀
+
+Getting full, accurate coverage of all build components in the benchmarks-- that's the foundation everything else (tests, CLI, parallel safety) builds on.
+
+### What's your biggest challenge right now, and how can I help? 🤝
+
+I'm still testing this against different projects to see how well it generalizes as a benchmarking tool, and most of next week's items (ensuring all components are reflected in benchmarks, testing, parallel safety, packaging as a CLI) are new territory for me, so I'm not yet sure whether it's a one-week or multiple weeks of workload. And I'd appreciate any feedback on the PR and the approach, and if you could suggest any projects to test it on that could help identify more limitations of the current code/approach.
+
+
+---
+
+
 ## Week of Aug 3 - Aug 7
 
 ### What went well this week? ✨

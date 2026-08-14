@@ -1,6 +1,29 @@
 Notes : https://hackmd.io/@Schefflera-Arboricola/H1Gvmv5zGg/edit
 
 
+# 11th August, 2026 (05:30pm IST, 9:00am BRT)
+
+**Attendees**: Aditi, Agriya
+
+## Agenda
+
+### Updates:
+
+- Going forward with more or less the approach suggested by the LLM— of using the EventManager to get the extension related info
+    - https://www.sphinx-doc.org/en/master/_modules/sphinx/events.html#EventManager 
+- Presented the current code and benchmarking output
+- Wrapping handler functions in a perf_counter and then adding the new EventListener instance with the wrapped handler function
+    - not sure how this interact with the priority of the events (the doctree-resolved event is not showing the correct %Build in the final output -- might be realted)
+    - Still a lot of bugs and errors in the script— hopefully will be done in next 2-3 days 
+    - [Agriya] CLI like this: https://coverage.readthedocs.io/en/7.15.4/
+    - Also in the next meeting -- share a draft roadmap for the coming weeks
+        - benchmarking tool, optimisations, blog
+- towards the end discussed scipy india and got some constructive feedback!
+
+
+---
+
+
 # 4th August, 2026 (05:30pm IST, 9:00am BRT)
 
 **Attendees**: Aditi, Agriya, Melissa
