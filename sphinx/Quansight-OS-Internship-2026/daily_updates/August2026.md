@@ -1,3 +1,51 @@
+## Week of Aug 17 - Aug 21
+
+### What went well this week? ✨
+
+- Worked on [PR#3](https://github.com/Schefflera-Arboricola/benchmark-sphinx-phase-wise/pull/3)
+    - addressed all the review comments (except one about accounting for gaps in benchmarks- WIP)
+    - fetched theme packages from `sphinx.html_themes` entry-point
+    - wrapped `app.connect` and accounted for more events and handlers registered all throughout the docs build process
+    - as a result of above, moved handler classification towards the end (in build-finished handler)
+    - undoing the wrapping of `emit_firstresult` to avoid overlap in the timing results
+    - made the extension work for matplotlib docs (for when module=None i.e. handler is in conf.py)
+    - using `functools.wraps` to wrap listeners
+    - moved benchmarking output to a separate folder
+    - WIP : integrating a notion of `depth` to avoid double counting of the durations of events/handlers (for cases of nested events and when handlers emit events)
+- Drafted a work plan for the remaining internship weeks: https://docs.google.com/document/d/1QD5vizVFdMjJFkOb6FGRaDSFqUEPIMSo65_kMpaiFMI/edit?usp=sharing
+- open 3 issues for next week: 
+    - [Refactor extension to enable parallel reading and writing](https://github.com/Schefflera-Arboricola/benchmark-sphinx-phase-wise/issues/4) 
+    - [Rename extension (`sphinx-benchmark`) and publish a release on GitHub and PyPI](https://github.com/Schefflera-Arboricola/benchmark-sphinx-phase-wise/issues/5) 
+    - [Add a basic sphinx-benchmark CLI](https://github.com/Schefflera-Arboricola/benchmark-sphinx-phase-wise/issues/6)
+- Discussed the above with mentors and got really useful feedback and a clearer long-term direction for the project and its usage! (see [meeting note](../notes/mentor_meetings_notes.md) for more.)
+
+### What do you want to achieve/complete next week? ✅
+
+- In PR#3
+    - Commit the `depth` implementation and display a meaningful breakdown of the gaps between the events (and in the build process, in general)
+    - Add basic documentation and tests 
+    - address any reviews/questions by mentors
+- Work on the above 3 opened issues
+- Organise and refactor the codebase into multiple files (`classes.py`, `utils.py`, `extension.py`) instead of one large file.
+- Test with and benchmark different scientific python projects, and debug any issues.
+- Start looking into the PyData sphinx theme sidebar issue: https://github.com/pydata/pydata-sphinx-theme/issues/762
+
+### If only one deliverable/project could get done this week what would it be? 🚀
+
+Get the extension to a basic, usable state with docs, tests, and a basic CLI, and then rename the extension and release.
+
+### What's your biggest challenge right now, and how can I help? 🤝
+
+Adding `depth` is a fairly big change because it affects several other methods/functions in the codebase-- so keeping track of variables and how they are updated, etc. 
+
+Then another main challenge is presenting the gaps (in between events) break-down in a meaningful and intuitive way to a user. And also identifying and minimising any overlapping or double-counting due to nested events, handlers that emit other events or anything else (idk yet?).
+
+I don't know if I need help with a specific thing but any questions/insights/feedback on any of the above stuff would be great!
+
+
+---
+
+
 ## Week of Aug 10 - Aug 14
 
 ### What went well this week? ✨

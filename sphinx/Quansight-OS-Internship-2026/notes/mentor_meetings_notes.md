@@ -1,6 +1,49 @@
 Notes : https://hackmd.io/@Schefflera-Arboricola/H1Gvmv5zGg/edit
 
 
+# 18th August, 2026 (05:30pm IST, 9:00am BRT)
+
+**Attendees**: Aditi, Agriya, Melissa
+
+## Agenda
+
+### Updates:
+
+- WIP PR: https://github.com/Schefflera-Arboricola/benchmark-sphinx-phase-wise/pull/3 (read PR description for the pain points/ToDos)
+- Draft plan for the coming weeks: https://docs.google.com/document/d/1QD5vizVFdMjJFkOb6FGRaDSFqUEPIMSo65_kMpaiFMI/edit?usp=sharing
+
+### Meeting notes
+
+- [Agriya] good to have `kind="theme"` classification (via entry-points) -- will help in optimising theme packages
+- [Agriya] introduce `depth` --> account for overlapping durations
+- [Melissa] use the extension and benchmark with different projects to find bugs
+
+- this week todos:
+    - PR#3: debug and address all the review comments and create issues for the rest of the pain points
+    - add some basic docs: functionality, a bit of internals, usage, limitations, etc.
+
+- Week 8
+    - work on creating it into a basic CLI tool (just one command to print all results) for a day and if it doesn't get done -- rename the project; create a github release (pyopensci guide, use hatchling) -- release it on PyPI
+    - work on CLI tool
+    - test the extension on different projects (try out with pandas docs)
+
+- Week 9
+    - visualisations: html, flamegraph, CLI tool options
+    - optimisations
+
+- strech goals:
+    - [Melissa] benchmark only a segment of the build process (e.g. just the reading phase, or just the sphinx-gallery extension)
+    - [Melissa] observing the overhead an extention adds to a project
+    - [Melissa] comparing an extension (e.g. sphinx-gallery) within matplotlib vs some other project's docs build
+        - to figure out how timings change with the number of plots, types of plots, how other extensions in the project influence the benchmarks
+    - naturally transition from benchmarking to implementing optimisations
+    - [Agriya] try building and benchmarking with pandas docs
+    - [Agriya] put a marker on a docstring and profile that (`.rst` --> `.html`)
+
+
+---
+
+
 # 11th August, 2026 (05:30pm IST, 9:00am BRT)
 
 **Attendees**: Aditi, Agriya
