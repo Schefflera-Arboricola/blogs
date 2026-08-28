@@ -1,3 +1,70 @@
+## TL;DR
+
+The project has progressed from a basic event-wise Sphinx benchmarking tool into a more complete and usable profiling extension, now renamed **sphinx-benchmark** and released on both [PyPI](https://pypi.org/project/sphinx-benchmark/) and [GitHub](https://github.com/Schefflera-Arboricola/sphinx-benchmark/releases/tag/v0.1.0). Most of the work was carried out in [PR#2](https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/2), [PR#3](https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/3) and [PR#8](https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/8). At the moment, the extension profiles and benchmarks a docs build and reports three things: a per-event breakdown of where time goes, a per-handler (with extension, theme and top-level module) breakdown within each event (so a slow event can be traced to the specific extension responsible), and a summary of the "gaps" -- the time that falls outside any event emissions. Events are tracked as a tree via a private stack, so that nested events don't get double-counted.
+
+The extension now has basic tests and substantially improved documentation, and has been benchmarked against Matplotlib, NumPy, NetworkX, and Pandas. A basic CLI renders the benchmark data either as terminal summary tables or as a static three-page HTML report. Feedback has been gathered from downstream projects at QShare and is now being collected more widely -- via the sphinx-dev mailing list, [Sphinx's GitHub Discussions](https://github.com/sphinx-doc/sphinx/discussions/14652) (which also carries a proposal to shift the extension into the sphinx-doc organisation), the Scientific Python Discord, and Quansight's internal Slack. The main remaining challenge is that a meaningful portion of Sphinx build time still appears as unexplained "gaps" that cannot currently be attributed to specific events, handlers, extensions, or other parts of the build process -- which limits the tool's usefulness for finding optimisations inside Sphinx itself, as opposed to within extensions. Reducing the extension's own measurement overhead is the other open issue that needs to be addressed.
+
+
+---
+
+
+## Week of Aug 24 - Aug 28
+
+### What went well this week? ✨
+
+- [PR#3](https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/3) merged!
+    - replaced record_event with enter_ and exit_event: maintains a stack of currently in progress event emissions (events like a DFS-tree); 
+    - keeping track of event's id, depth, parent_id and own_times; 
+    - storing total_wall_time in the json; 
+    - replaced print_summary with a separate script that prints the benchmarking summary, and printing gaps' summary table at the end, and printing number of emissions for each event
+    - added try-except in setup()
+    - updated README: added sections on Usage, installation, Limitations of the extension, How are benchmarks calculated?, how to read benchmarks and what benchmarks mean
+    - updated and added benchmarks for matplotlib, numpy, networkx, pandas
+    - added basic tests
+- switched from setuptools to hatchling: https://github.com/Schefflera-Arboricola/sphinx-benchmark/commit/a1518f906d11ff621fa039e8b5ea3e552d86fab3
+- closed https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues/5
+    - renamed the project to `sphinx-benchmark`
+    - made a PyPI release: https://pypi.org/project/sphinx-benchmark/
+    - made a Github release: https://github.com/Schefflera-Arboricola/sphinx-benchmark/releases/tag/v0.1.0
+- gathering community feedback:
+    - sphinx-dev mailing list(approval pending)
+    - sphinx's github discussions: https://github.com/sphinx-doc/sphinx/discussions/14652
+    - scientific python discord(documentation channel)
+    - quansight's internal slack
+- Wrote a proposal to add the sphinx-benchmark extension to the sphinx-doc github organisation: https://github.com/sphinx-doc/sphinx/discussions/14652
+- added a basic CLI to display the benchmarks in `table` and `html` formats: https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/8
+    - Reads sphinx_benchmarks.json and renders it either as the two terminal summary tables or as a static three-page HTML report(overview with pie chart, events and handlers, gaps).
+- opened: https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues/7
+
+
+### What do you want to achieve/complete next week? ✅
+
+- Break down the gaps : try wrapping `app.registry`, `SphinxTransformer.apply_transforms` or `Builder` and see if that gets us more information
+- Reduce the extension's own overhead
+- Test and benchmark against more scientific Python projects, and debug any issues
+- Build on the CLI -- more options and improvements(needs to discuss with the mentors first)
+- Work on the open issues and the limitations listed in the README
+- Continue collecting feedback from mentors, Sphinx maintainers, extension authors, users and act on it
+- Start drafting the internship blog post
+
+### If only one deliverable/project could get done this week what would it be? 🚀
+
+- Getting the gaps' breakdown
+- Reduce the extension's own overhead
+- Test and benchmark against more scientific Python projects, and debug any issues
+
+### What's your biggest challenge right now, and how can I help? 🤝
+
+- A meaningful chunk of build time still lands in gaps the extension can't attribute to anything, which makes the extension useful for optimising other sphinx extensions but not necessarily to add optimisations within the sphinx's codebase. I'm looking into methods and class that I could track to get more detailed gap break down-- any help on this would be great! 
+
+- Another thing I would like help and suggestions on is reducing the overhead that the sphinx-benchmark extension adds itself to the build process.
+
+- Another thing is that almost every design decision so far has been mine and my mentors alone-- the event-tree model, the JSON output, how the summary reads -- so what I'd most value is feedback from someone running this extension on their project and telling me whether the output actually tells them anything useful(like here: https://github.com/pydata/pydata-sphinx-theme/pull/2477).
+
+
+---
+
+
 ## Week of Aug 17 - Aug 21
 
 ### What went well this week? ✨

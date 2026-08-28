@@ -1,6 +1,32 @@
 Notes : https://hackmd.io/@Schefflera-Arboricola/H1Gvmv5zGg/edit
 
 
+# 25th August, 2026 (05:30pm IST, 9:00am BRT)
+
+**Attendees**: Aditi, Melissa , Agriya
+
+## Agenda
+
+### Updates:
+
+- went through the new updates in https://github.com/Schefflera-Arboricola/benchmark-sphinx-phase-wise/pull/3
+- [Agriya+Melissa] tests: smoke test, related to interface, if the wrapping is properly happening, perf_counter is working, time is getting recorded
+
+- [Melissa+Agriya] Can merge this PR and about the release-- we will discuss on slack
+
+- the `process_generate_options` is from autosummary but marked as sphinx-internals
+
+- Melissa: are we showing the right level of information for someone to figure out what to optimise?
+- Melissa: by the end of internship-- will be good to have an example of optimisation that we drived by looking at these benchmarking results
+    - numpydoc optimisation (mangle_ functions)
+    - jupyterlite (.rst -> .md function-- might not have any scope of optimisation by should look at it once) 
+
+- ended half an hour early -- might have another meeting this week
+
+
+---
+
+
 # 18th August, 2026 (05:30pm IST, 9:00am BRT)
 
 **Attendees**: Aditi, Agriya, Melissa
