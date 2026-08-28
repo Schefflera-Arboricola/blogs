@@ -1,5 +1,221 @@
 Notes : https://hackmd.io/@Schefflera-Arboricola/H1Gvmv5zGg/edit
 
+
+# 25th August, 2026 (05:30pm IST, 9:00am BRT)
+
+**Attendees**: Aditi, Melissa , Agriya
+
+## Agenda
+
+### Updates:
+
+- went through the new updates in https://github.com/Schefflera-Arboricola/benchmark-sphinx-phase-wise/pull/3
+- [Agriya+Melissa] tests: smoke test, related to interface, if the wrapping is properly happening, perf_counter is working, time is getting recorded
+
+- [Melissa+Agriya] Can merge this PR and about the release-- we will discuss on slack
+
+- the `process_generate_options` is from autosummary but marked as sphinx-internals
+
+- Melissa: are we showing the right level of information for someone to figure out what to optimise?
+- Melissa: by the end of internship-- will be good to have an example of optimisation that we drived by looking at these benchmarking results
+    - numpydoc optimisation (mangle_ functions)
+    - jupyterlite (.rst -> .md function-- might not have any scope of optimisation by should look at it once) 
+
+- ended half an hour early -- might have another meeting this week
+
+
+---
+
+
+# 18th August, 2026 (05:30pm IST, 9:00am BRT)
+
+**Attendees**: Aditi, Agriya, Melissa
+
+## Agenda
+
+### Updates:
+
+- WIP PR: https://github.com/Schefflera-Arboricola/benchmark-sphinx-phase-wise/pull/3 (read PR description for the pain points/ToDos)
+- Draft plan for the coming weeks: https://docs.google.com/document/d/1QD5vizVFdMjJFkOb6FGRaDSFqUEPIMSo65_kMpaiFMI/edit?usp=sharing
+
+### Meeting notes
+
+- [Agriya] good to have `kind="theme"` classification (via entry-points) -- will help in optimising theme packages
+- [Agriya] introduce `depth` --> account for overlapping durations
+- [Melissa] use the extension and benchmark with different projects to find bugs
+
+- this week todos:
+    - PR#3: debug and address all the review comments and create issues for the rest of the pain points
+    - add some basic docs: functionality, a bit of internals, usage, limitations, etc.
+
+- Week 8
+    - work on creating it into a basic CLI tool (just one command to print all results) for a day and if it doesn't get done -- rename the project; create a github release (pyopensci guide, use hatchling) -- release it on PyPI
+    - work on CLI tool
+    - test the extension on different projects (try out with pandas docs)
+
+- Week 9
+    - visualisations: html, flamegraph, CLI tool options
+    - optimisations
+
+- strech goals:
+    - [Melissa] benchmark only a segment of the build process (e.g. just the reading phase, or just the sphinx-gallery extension)
+    - [Melissa] observing the overhead an extention adds to a project
+    - [Melissa] comparing an extension (e.g. sphinx-gallery) within matplotlib vs some other project's docs build
+        - to figure out how timings change with the number of plots, types of plots, how other extensions in the project influence the benchmarks
+    - naturally transition from benchmarking to implementing optimisations
+    - [Agriya] try building and benchmarking with pandas docs
+    - [Agriya] put a marker on a docstring and profile that (`.rst` --> `.html`)
+
+
+---
+
+
+# 11th August, 2026 (05:30pm IST, 9:00am BRT)
+
+**Attendees**: Aditi, Agriya
+
+## Agenda
+
+### Updates:
+
+- Going forward with more or less the approach suggested by the LLM— of using the EventManager to get the extension related info
+    - https://www.sphinx-doc.org/en/master/_modules/sphinx/events.html#EventManager 
+- Presented the current code and benchmarking output
+- Wrapping handler functions in a perf_counter and then adding the new EventListener instance with the wrapped handler function
+    - not sure how this interact with the priority of the events (the doctree-resolved event is not showing the correct %Build in the final output -- might be realted)
+    - Still a lot of bugs and errors in the script— hopefully will be done in next 2-3 days 
+    - [Agriya] CLI like this: https://coverage.readthedocs.io/en/7.15.4/
+    - Also in the next meeting -- share a draft roadmap for the coming weeks
+        - benchmarking tool, optimisations, blog
+- towards the end discussed scipy india and got some constructive feedback!
+
+
+---
+
+
+# 4th August, 2026 (05:30pm IST, 9:00am BRT)
+
+**Attendees**: Aditi, Agriya, Melissa
+
+## Agenda
+
+### Updates:
+
+- made [benchmark-sphinx-phase-wise](https://github.com/Schefflera-Arboricola/benchmark-sphinx-phase-wise) into a sphinx extension, while using the events callback API for recording the time.
+- experimenting with event-wise benchmarking (For Matplotlib docs build):
+    - recorded start time, duration and number of calls for each event-- stored all that in a .json and then wrote a script to generate the following summary table:
+
+```bash
+Event                                   Calls      Total (s)       Avg (ms)   % Build
+-------------------------------------------------------------------------------------
+config-inited                               1     524.072088     524072.088    52.53%
+doctree-resolved                         2081     192.077803         92.301    19.25%
+source-read                              2081     153.767586         73.891    15.41%
+object-description-transform             7034      85.980617         12.224     8.62%
+doctree-read                             2081      23.250254         11.173     2.33%
+env-purge-doc                            2081       8.892121          4.273     0.89%
+write-started                               1       3.728634       3728.634     0.37%
+include-read                               50       1.720333         34.407     0.17%
+builder-inited                              1       1.625397       1625.397     0.16%
+env-updated                                 1       1.278362       1278.362     0.13%
+warn-missing-reference                    141       1.271878          9.020     0.13%
+env-before-read-docs                        1       0.000482          0.482     0.00%
+env-check-consistency                       1       0.000428          0.428     0.00%
+build-finished                              1       0.000000          0.000     0.00%
+```
+
+
+For reference, phase-wise benchmarking:
+```bash
+==================================================
+Sphinx phase-wise benchmarks
+==================================================
+
+Initialization :  452.402 s
+Reading        :  207.971 s
+Consistency    :    0.699 s
+Pre-writing    :    0.000 s
+Resolving      :  180.908 s
+Writing        :    7.531 s
+
+--------------------------------------------------
+Total          :  849.511 s
+```
+
+Also, benchmarks from the previous "time-stampped logging messages" approach:
+
+```bash
+=== Main Phase Benchmarks ===
+
+Initialization        443.825 s
+Reading               233.482 s
+Consistency             0.051 s
+Resolving               3.702 s
+Writing               182.212 s
+```
+
+- presented at the end: event-wise graph visualisation for sphinx build.. will experiment more with visualisations later!
+
+![img](./assets/static/event_graph.png)
+
+- Phase-wise benchmarking is currently designed around events/callbacks. 
+    - **Do you think if events callback is the right basis for this profiler? I’m not sure if using events as the primary basis will allow us to get more finer details/granularity and insight.. we should probably take a step back and consider a different underlying basis for profiling. What are your thoughts on this?**
+
+- More detailed profiling in terms of:
+    - extension details
+    - capturing parallelism -- define this properly!
+
+
+- [Melissa and Agriya] Event-wise benchmarking >> phase-wise benchmarking (phase-wise is a bit arbitrary)
+
+- ToDo: build event-wise benchmarking with NumPy
+    - docs build error - ask Melissa
+    - normalise based on the number of pages/calls (i.e. matplotlib and numpy has similar events?) and then analyse
+    - notebook also counts as a page! page with plots, etc-- difficult to normalise per page.
+    - output and results for 3 different groups: project maintainers, sphinx maintainers, extension maintainers
+
+- using emit: https://www.sphinx-doc.org/en/master/extdev/eventapi.html#sphinx.events.EventManager.emit
+
+- [claude] is there a private or public list of extensions connected to a specific sphinx event?
+
+```
+Sphinx question, not code task. Answer direct.
+
+No public list. Sphinx no expose "which extensions connected to event X" API.
+
+Private access:
+app.events.listeners  # defaultdict[str, list[EventListener]]
+app.events.listeners['builder-inited']  # listeners for one event
+
+app.events = EventManager (sphinx/events.py). Each entry = EventListener(id, handler, priority) namedtuple.
+
+Caveats:
+Stores handler callable, not extension name. No direct extension→event mapping.
+Infer origin via handler.__module__ (e.g. sphinx.ext.autodoc).
+id = sequential int, not extension id.
+
+Get extension names instead: app.extensions = dict of loaded extensions (Extension objects), but that no tell which events each hooks.
+
+No built-in that joins the two. Must walk listeners + inspect __module__ yourself.
+
+Want snippet that builds event→extension map?
+
+✻ Cogitated for 12s
+```
+- `app_config`, `app`, `env` - core events page --> to find which events are connected to which extensions - https://www.sphinx-doc.org/en/master/extdev/event_callbacks.html#core-events-overview -- extensions don't always use `app.connect`
+- revisit sphinx-process-graph - event.listeners
+- [Melissa] use inspection
+- monkey patching in the sphinx benchmarking extension to record everytime an extension gets connected (overriding sphinx's core functionality)
+
+ToDo:
+
+- this week: which extensions are connected to which events? getting list of extensions per event? also extensions can add events...
+- then later : how much time each event is taking within the extensions?
+
+
+---
+
+
 # 28th July, 2026 (05:30pm IST, 9:00am BRT)
 
 **Attendees**: Aditi, Melissa, Agriya
