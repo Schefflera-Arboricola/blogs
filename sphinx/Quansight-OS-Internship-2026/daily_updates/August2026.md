@@ -27,7 +27,7 @@ The extension now has basic tests and substantially improved documentation, and 
     - made a PyPI release: https://pypi.org/project/sphinx-benchmark/
     - made a Github release: https://github.com/Schefflera-Arboricola/sphinx-benchmark/releases/tag/v0.1.0
 - gathering community feedback:
-    - sphinx-dev mailing list(approval pending)
+    - sphinx-dev mailing list: https://groups.google.com/g/sphinx-dev/c/R492a_Fsdvw
     - sphinx's github discussions: https://github.com/sphinx-doc/sphinx/discussions/14652
     - scientific python discord(documentation channel)
     - quansight's internal slack
