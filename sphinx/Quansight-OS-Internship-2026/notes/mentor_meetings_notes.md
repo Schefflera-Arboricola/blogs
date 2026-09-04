@@ -1,5 +1,43 @@
 Notes : https://hackmd.io/@Schefflera-Arboricola/H1Gvmv5zGg/edit
 
+# 2nd September, 2026 (05:30pm IST, 9:00am BRT)
+
+**Attendees**: Aditi, Agriya, Melissa
+
+## Agenda
+
+### Updates:
+
+- Merged [PR#3](https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/3)
+- Made a release on [PyPI](https://pypi.org/project/sphinx-benchmark/) and [GitHub](https://github.com/Schefflera-Arboricola/sphinx-benchmark/releases/tag/v0.1.0)
+- Proposal to add sphinx-benchmark to sphinx org: https://github.com/sphinx-doc/sphinx/discussions/14652 (https://groups.google.com/g/sphinx-dev/c/R492a_Fsdvw)
+- basic CLI added (mostly AI):
+    - [PR#8](https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/8) - merged
+    - [PR#15](https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/15) - under review
+- https://github.com/pydata/pydata-sphinx-theme/pull/2477
+- Currently working on:
+    - trying to profile the gaps (https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues/9)
+
+- ToDos:
+    - Include project name and version in report: https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues/13
+    - add a release.md and work on https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues/14
+    - post the extension on Write the docs slack after 2nd release
+
+- internet/network --> flag these issues
+    - inter-sphinx
+    - [IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+
+- https://github.com/melissawm/minimalsphinx
+
+- ToDos before v2:
+    - show inter-sphinx in the benchmarks
+    - gaps break down profiling
+    - add name of the project/version in the benchmarks
+    - CLI with events/handler/gaps breakdown (reviews will come on this by tomorrow morning)
+
+
+---
+
 
 # 25th August, 2026 (05:30pm IST, 9:00am BRT)
 
