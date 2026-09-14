@@ -1,5 +1,45 @@
 Notes : https://hackmd.io/@Schefflera-Arboricola/H1Gvmv5zGg/edit
 
+
+# 8th September, 2026 (05:30pm IST, 9:00am BRT)
+
+**Attendees**: Aditi, Agriya, Melissa
+
+## Points to discuss
+
+- Gap-break down approach: creating a parallel daemon thread and recording the [`sys._current_frames`](https://docs.python.org/3/library/sys.html#sys._current_frames) in between events(i.e. in gaps).
+    - Sampling within a handler/event (like generate_gallery_rst --> ~40% of build)?
+    - [Agriya] conda-forge uses daemon thread for file watching
+    - this PR should be ready by thursday
+- uv.lock file in .gitignore? --> keep it in .gitignore for now; would need to update it weekly and it is mostly good to add for projects that require reproducibility.
+- zizmor (linting for GA) in pre-commit hook for now
+- Address review comments on GitHub actions PR
+- make 0.2.0 release after the above things are done! most likely by friday.
+- todo: work on blog
+- parallel builds and adding optimisations
+
+## Meeting notes
+
+- Melissa shared a doc of claude's review report (work on 1.1 and 1.5)
+- [Melissa] first priority: document the limitation; give users warnings if needed; second priority: work on fixing those limitations (context: making extension parallel safe)
+    - Add a warning in the report that it was a serial build
+    - add machine specs (number of cores can be tricky so don't mention those)
+
+- Projects to add: CPython, PyWavelets, pytest(furo theme), sympy, any projects in scientific python ecosystem
+- [Melissa] blog: good to have one optimisation (implemented preferably in sphinx by me) -- good for marketing the extension; add [@Cadair](https://github.com/Cadair)'s PR to the blog
+- reduce sphinx's minimum version to 8 so that scipy can also work with it.
+
+
+## Plan:
+
+- this week: gap break down and review comments and above todos; release by friday and spread the word
+- next week: making the extension parallel safe; optimisations; blog draft
+- last week: blog;QShare presentation; conference travel; open up any issues if needed; work on docs etc.
+
+
+---
+
+
 # 2nd September, 2026 (05:30pm IST, 9:00am BRT)
 
 **Attendees**: Aditi, Agriya, Melissa

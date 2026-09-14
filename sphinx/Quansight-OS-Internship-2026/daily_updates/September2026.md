@@ -1,3 +1,46 @@
+## Week of Sep 7 - Sep 11
+
+### What went well this week? ✨
+
+- [WIP] Gap breakdown: capturing what runs in between events, since a large share of build time currently falls outside any sphinx event emissions. Approach: a parallel [daemon thread](https://docs.python.org/3/library/threading.html#threading.Thread.daemon) sampling [`sys._current_frames`](https://docs.python.org/3/library/sys.html#sys._current_frames) during the gaps. Related: [discussion](https://discuss.python.org/t/getting-rid-of-daemon-threads/68836) on the future of daemon threads (maybe a risk to this approach).
+- Merged PRs:
+    - added more options to CLI and more details to the html report : [PR#15](https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/15)
+    - added project info(project name, version, HEAD commit, copyright) and build info(builder, start time, total time) to the json and output : [PR#20](https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/20)
+    - Including unique identifiers (date, start time, HEAD) in the benchmarks json filename : [PR#23](https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/23)
+    - added github workflows (lint, pytest, publish) : [PR#24](https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/24)
+- issues opened:
+    - [AI] Handlers are misattributed between sibling namespace packages: https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues/26
+    - Add serial build warning in the report : https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues/25
+- 1 PTO
+
+### What do you want to achieve/complete next week? ✅
+
+- Add a gap-breakdown to the benchmarks
+- Address review comments on [PR #24](https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/24)
+- Add zizmor (GitHub Actions linting) as a pre-commit hook for now
+- Lower the minimum Sphinx version to 8 so SciPy can run this extension
+- Add a warning msg to the benchmarking output about serial build
+- 0.2.0 release
+- work on blog
+- enabling parallel builds
+- optimisations
+- Add more projects' benchmarks: CPython, PyWavelets, pytest (furo theme), sympy, and others in the Scientific Python ecosystem
+- work on other open issues
+
+### If only one deliverable/project could get done this week what would it be? 🚀
+
+- The gap-breakdown PR
+- push some of the quick and easy items from the above list and make 0.2.0 release.
+- work on blog
+
+### What's your biggest challenge right now, and how can I help? 🤝
+
+The gap-breakdown design is the biggest challenge right now, I think. Any feedback on this would be great: if the sampling overhead distorts the benchmarking numbers, whether there's a more durable alternative approach given the daemon-thread discussion above, any user interface related feedback.
+
+
+---
+
+
 ## Week of Aug 31 - Sep 4
 
 ### What went well this week? ✨
