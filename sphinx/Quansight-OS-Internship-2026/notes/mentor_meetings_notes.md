@@ -1,5 +1,56 @@
 Notes : https://hackmd.io/@Schefflera-Arboricola/H1Gvmv5zGg/edit
 
+# 16th September, 2026 (05:30pm IST, 9:00am BRT)
+
+**Attendees**: Aditi, Agriya, Melissa
+
+## Points to discuss
+
+- Sampling PR
+    - Doesn’t work with GIL disabled right now
+        - [Agriya] Not that big of an issue right now--- bcoz the sphinx ecosystem hasn't done alot with free-threaded python yet!
+        - [Melissa+Agriya] good to keep the code organised and modular so that it is easier to implement an alternative implementation that enables free-threaded python and also parallel safe builds
+    - Approach:
+        - Collecting frames (aka samples aka snapshots) every 1ms throughout the build process, by using `sys._current_frames()` and a parallel daemon thread. Frames are collected and stored as follows:
+            - `functions`: one entry per distinct function ever seen in any snapshot, with its function name, module, file, line, kind and extension. Its position in this list is its function id.
+            - `stacks`: one entry per distinct stack of functions ever seen. Each is a list of function ids, innermost function first i.e. index 0 is the function running, the last one is the outermost function. generated using `frame.f_back`.
+            - `snapshots`: one entry per sample: [seconds since build start, stack id].
+            - Example:
+                ```python
+                "functions": [
+                    {"function": "main",         "module": "sphinx.cmd.build", ...},
+                    {"function": "Sphinx.build", "module": "sphinx.application", ...},
+                    {"function": "parse",        "module": "docutils.parsers.rst", ...}
+                ],
+                "stacks":    [[2, 1, 0], [1, 0]],
+                "snapshots": [[0.0012, 0], [0.0021, 0], [0.0033, 1]]
+                ```
+                Read it as: the first two samples/snapshots saw that the docs build thread was running inside `parse` function, which was called by `Sphinx.build`, which was called by `main`. The third sample saw build inside `Sphinx.build`.
+            - Notes: 
+                - nothing in frames explicitly tells us if it was in an event or handler or gap. That gets figured out later by comparing the snapshot times to the start times and durations of the events and handler calls records. (Need to verify these calculations)
+                - according to claude's experimentation, each sample itself takes about 30 µs, during which the build thread is paused.
+                - Overhead: GIL's switch interval(5 ms)-- a thread running Python code needs to hand over the GIL every 5 ms. The sampler's 1 ms timer expires, then it sits in line for upto 5 more ms before it can execute a its next Python instruction. It never gets faster than about 1 ms, because that is the sleep, and it never gets slower than about one switch interval plus the sleep, because eventually the GIL is forced to change hands.
+
+- TODOs:
+    - sampling PR (merge by thursday)
+        - [Melissa] update PR description - why is it important and needed-- selling your PR
+        - add more docs
+    - try running the extension with `parallel_read_safe": True"` and `parallel_write_safe": True"`
+        - [Agriya] autodoc might speedup -- it has a lot of parallelism
+    - Release 0.2: github org change?
+    - Work on blog
+    - Optimisations
+
+- follow systems design principles
+    - [Agriya] lift example: states, functionality/logic
+    - Cyclomatic complexity
+    - bigger picture and high level interactions of different components
+    - [Melissa] separation of concerns/functionality
+    - write_json and classify_all_handler outside EventLogger. recorder should only record.
+
+
+---
+
 
 # 8th September, 2026 (05:30pm IST, 9:00am BRT)
 

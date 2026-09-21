@@ -1,3 +1,55 @@
+## Week of Sep 14 - Sep 18
+
+### What went well this week? ✨
+
+- PRs merged/worked on (see the PR description for more):
+    - improved workflows, added zizmor and pre-commit.ci: https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/30
+    - Sampling the docs build's function call stack: https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/27
+- opened issues
+    - Include a per-document time breakdown table/page to the benchmarks report: https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues/28
+    - allow users to configure the sampling time interval: https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues/29
+    - Add support for free-threaded python: https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues/31
+- worked on drafting the internship blog
+- got a lot of additional, useful feedback and support in the coffee-buddies session with Melissa (and also by Agriya over the weekend)
+
+## What do you want to achieve/complete next week? ✅
+
+- PR #27
+    - improve code quality
+    - add more documentation - about the internal workings and in the benchmarks report
+    - Update benchmarks: upload `json`s instead of outputs
+    - improve the report interface and CLI
+- Enable changing the default sampling interval time: issue #29
+- Add serial build warning in the benchmarks report
+- Move write_json and classify_all_handler outside EventLogger-- find any other similar improvements-- following system design principles
+- reduce Sphinx version to 8
+- post about this extension in different groups, channels, etc. -- spread the word
+- Add more projects benchmarks: CPython, PyWavelets, pytest (furo theme), sympy, and others in the Scientific Python ecosystem
+- change github org to quansight labs and Make release v0.2
+- Work on the blog and final QShare presentation
+- work on adding optimisations based on the benchmarking results
+
+### If only one deliverable/project could get done this week what would it be? 🚀
+
+- merge PR #27, resolve issue #29
+- Add serial build warning in the benchmarks report
+- Move write_json and classify_all_handler outside EventLogger-- find any other similar improvements-- following system design principles
+- reduce Sphinx version to 8
+- post about this extension in different groups, channels, etc.
+- change github org to quansight labs and Make release v0.2
+- Work on the internship blog
+- PTO: traveling for IndiaFOSS (will give a lightening talk on sphinx-benchmark if my proposal gets accepted.)
+
+### What's your biggest challenge right now, and how can I help? 🤝
+
+My main challenge is mainly trying to make the most of these last few weeks by getting as much important work done as possible, while also balancing blog and presentation deadlines, travel, and preparation for the upcoming conferences.
+
+I'd really appreciate any feedback on how I should prioritize tasks in the coming days-- and in general on the work I've been doing, the code quality, user interface, or anything else that could be improved. Also anything to help spread the word about this extension and get more feedback would be great!
+
+
+---
+
+
 ## Week of Sep 7 - Sep 11
 
 ### What went well this week? ✨
