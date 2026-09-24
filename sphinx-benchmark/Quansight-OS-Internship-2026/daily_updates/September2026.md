@@ -1,3 +1,49 @@
+
+## Week of Sep 21 - Sep 25
+
+### What went well this week? ✨
+
+- v0.2.0 release: pls see the commit history on Github for more: https://github.com/Schefflera-Arboricola/sphinx-benchmark/compare/v0.1.0...v0.2.0
+- worked on the blog : https://github.com/Quansight/Quansight-website/pull/1011
+- worked on the QShare presentation and talk proposal for IndiaFOSS
+- 1 PTO
+- will give a lightening talk at IndiaFOSS on Sunday, if the proposal gets accepted.
+
+### What do you want to achieve/complete next week? ✅
+
+- address any reviews on the blog PR and get it merged/published.
+    - need to fix the alignment and formatting of the figures
+- Qshare presentation
+- try implementing an optimisation based on the benchmarks
+- update/add benchmarking outputs
+- discuss implications of feature proposed in issue [#38](https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues/38) with mentors
+- spread the word about the extension in different community forums/channels/groups/conferences
+- off-boarding
+- work on other open issues and create some more open issues
+- move extension to QS or sphinx-doc or sphinx-contrib github org
+
+### If only one deliverable/project could get done this week what would it be? 🚀
+
+- address any reviews on blog PR and get it merged/published.
+- Qshare presentation
+- try implementing an optimisation based on the benchmarks
+- update/add benchmarking outputs
+- discuss implications of issue [#38](https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues/38) with mentors
+- spread the word about the extension in different community forums/channels/groups/conferences
+- off-boarding
+- work on other open issues and create some more open issues
+- move extension to QS or sphinx-doc or sphinx-contrib github org
+
+### What's your biggest challenge right now, and how can I help? 🤝
+
+I just want to say thank you. Your guidance, patience, and time over these three months meant a lot to me and I'm truly grateful to you both! Working on sphinx-benchmark taught me how to find my way around unfamiliar concepts and challenges, and how to ask for help and improve the quality of the code I write. And I think I've grown a lot as an open-source contributor and as a software developer, and I'd love to stay in touch after the internship.
+
+I'd love to keep contributing after the internship, so if there's anything I can take off your plate, let me know. I hope we stay in touch. And I hope to contribute more and get more involved in the Scientific Python community. Thanks!
+
+
+---
+
+
 ## Week of Sep 14 - Sep 18
 
 ### What went well this week? ✨

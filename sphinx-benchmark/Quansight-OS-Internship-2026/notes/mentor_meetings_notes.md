@@ -1,5 +1,47 @@
 Notes : https://hackmd.io/@Schefflera-Arboricola/H1Gvmv5zGg/edit
 
+
+
+# 22nd September, 2026 (05:30pm IST, 9:00am BRT)
+
+**Attendees**: Aditi, Agriya, Melissa
+
+## Meeting Notes
+
+- https://github.com/jdillard/sphinx-numref-performance . From slack:
+
+> The :numref: resolver no longer unpickles the target doctree, and the quadratic behavior is gone: the 100-table page dropped from ~3.1s to 0.42s (the numfig-only baseline is 0.41s), and 200 tables went from ~14.9s to 0.85s, which now scales linearly (50 → 0.24s, 100 → 0.42s, 200 → 0.85s). The write-started → doctree-resolved gap fell from ~2.7s to 0.04s.
+    
+- shared draft blog and got feedback from mentors!
+    - [Agriya] https://codecarbon.io/ -- call to action at the end for maintainers
+- [Melissa] use milestones on issues and PRs
+
+### ToDos:
+- quick ones:
+    - org change to Quansight Labs - invitation sent to Agriya and Melissa
+        - tried this during the meeting but Aditi can't get admin access for a repo in Quansight Labs and as an outsider collaborator (i.e. only write access) it won't be possible to make a v0.2.0 release. So repo transfered back to Aditi.
+    - sphinx version down to 8
+    - Move write_json and classify_all_handlers outside event logger
+- Agriya:
+    - PyWavelets benchmarks
+    - add machine specs to the benchmarking output
+    - optimisation in pydata-sphinx-theme or numpydocs (+ Melissa also in numpy) -- will look good in blog!
+- important ones:
+    - Enable configuring default sampling interval + the switch interval time (also add switch interval to frames in json and print in the report)
+    - blog and QShare presentation
+
+- low priority:
+    - process to add a repo to sphinx-contrib org? who/where to reach out to?
+    - update benchmarks with json files for all projects
+    - add more projects' benchmarks
+    - any system design-related improvements?
+    - improve CLI and more docs on CLI
+    - contribute some optimisations (high impact: pydata-sphinx-theme or sphinx itself or numpydocs) -- mentors will be helping with this.
+
+
+---
+
+
 # 16th September, 2026 (05:30pm IST, 9:00am BRT)
 
 **Attendees**: Aditi, Agriya, Melissa
