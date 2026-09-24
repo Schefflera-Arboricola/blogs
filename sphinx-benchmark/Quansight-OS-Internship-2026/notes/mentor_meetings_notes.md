@@ -1,6 +1,177 @@
 Notes : https://hackmd.io/@Schefflera-Arboricola/H1Gvmv5zGg/edit
 
 
+
+# 22nd September, 2026 (05:30pm IST, 9:00am BRT)
+
+**Attendees**: Aditi, Agriya, Melissa
+
+## Meeting Notes
+
+- https://github.com/jdillard/sphinx-numref-performance . From slack:
+
+> The :numref: resolver no longer unpickles the target doctree, and the quadratic behavior is gone: the 100-table page dropped from ~3.1s to 0.42s (the numfig-only baseline is 0.41s), and 200 tables went from ~14.9s to 0.85s, which now scales linearly (50 → 0.24s, 100 → 0.42s, 200 → 0.85s). The write-started → doctree-resolved gap fell from ~2.7s to 0.04s.
+    
+- shared draft blog and got feedback from mentors!
+    - [Agriya] https://codecarbon.io/ -- call to action at the end for maintainers
+- [Melissa] use milestones on issues and PRs
+
+### ToDos:
+- quick ones:
+    - org change to Quansight Labs - invitation sent to Agriya and Melissa
+        - tried this during the meeting but Aditi can't get admin access for a repo in Quansight Labs and as an outsider collaborator (i.e. only write access) it won't be possible to make a v0.2.0 release. So repo transfered back to Aditi.
+    - sphinx version down to 8
+    - Move write_json and classify_all_handlers outside event logger
+- Agriya:
+    - PyWavelets benchmarks
+    - add machine specs to the benchmarking output
+    - optimisation in pydata-sphinx-theme or numpydocs (+ Melissa also in numpy) -- will look good in blog!
+- important ones:
+    - Enable configuring default sampling interval + the switch interval time (also add switch interval to frames in json and print in the report)
+    - blog and QShare presentation
+
+- low priority:
+    - process to add a repo to sphinx-contrib org? who/where to reach out to?
+    - update benchmarks with json files for all projects
+    - add more projects' benchmarks
+    - any system design-related improvements?
+    - improve CLI and more docs on CLI
+    - contribute some optimisations (high impact: pydata-sphinx-theme or sphinx itself or numpydocs) -- mentors will be helping with this.
+
+
+---
+
+
+# 16th September, 2026 (05:30pm IST, 9:00am BRT)
+
+**Attendees**: Aditi, Agriya, Melissa
+
+## Points to discuss
+
+- Sampling PR
+    - Doesn’t work with GIL disabled right now
+        - [Agriya] Not that big of an issue right now--- bcoz the sphinx ecosystem hasn't done alot with free-threaded python yet!
+        - [Melissa+Agriya] good to keep the code organised and modular so that it is easier to implement an alternative implementation that enables free-threaded python and also parallel safe builds
+    - Approach:
+        - Collecting frames (aka samples aka snapshots) every 1ms throughout the build process, by using `sys._current_frames()` and a parallel daemon thread. Frames are collected and stored as follows:
+            - `functions`: one entry per distinct function ever seen in any snapshot, with its function name, module, file, line, kind and extension. Its position in this list is its function id.
+            - `stacks`: one entry per distinct stack of functions ever seen. Each is a list of function ids, innermost function first i.e. index 0 is the function running, the last one is the outermost function. generated using `frame.f_back`.
+            - `snapshots`: one entry per sample: [seconds since build start, stack id].
+            - Example:
+                ```python
+                "functions": [
+                    {"function": "main",         "module": "sphinx.cmd.build", ...},
+                    {"function": "Sphinx.build", "module": "sphinx.application", ...},
+                    {"function": "parse",        "module": "docutils.parsers.rst", ...}
+                ],
+                "stacks":    [[2, 1, 0], [1, 0]],
+                "snapshots": [[0.0012, 0], [0.0021, 0], [0.0033, 1]]
+                ```
+                Read it as: the first two samples/snapshots saw that the docs build thread was running inside `parse` function, which was called by `Sphinx.build`, which was called by `main`. The third sample saw build inside `Sphinx.build`.
+            - Notes: 
+                - nothing in frames explicitly tells us if it was in an event or handler or gap. That gets figured out later by comparing the snapshot times to the start times and durations of the events and handler calls records. (Need to verify these calculations)
+                - according to claude's experimentation, each sample itself takes about 30 µs, during which the build thread is paused.
+                - Overhead: GIL's switch interval(5 ms)-- a thread running Python code needs to hand over the GIL every 5 ms. The sampler's 1 ms timer expires, then it sits in line for upto 5 more ms before it can execute a its next Python instruction. It never gets faster than about 1 ms, because that is the sleep, and it never gets slower than about one switch interval plus the sleep, because eventually the GIL is forced to change hands.
+
+- TODOs:
+    - sampling PR (merge by thursday)
+        - [Melissa] update PR description - why is it important and needed-- selling your PR
+        - add more docs
+    - try running the extension with `parallel_read_safe": True"` and `parallel_write_safe": True"`
+        - [Agriya] autodoc might speedup -- it has a lot of parallelism
+    - Release 0.2: github org change?
+    - Work on blog
+    - Optimisations
+
+- follow systems design principles
+    - [Agriya] lift example: states, functionality/logic
+    - Cyclomatic complexity
+    - bigger picture and high level interactions of different components
+    - [Melissa] separation of concerns/functionality
+    - write_json and classify_all_handler outside EventLogger. recorder should only record.
+
+
+---
+
+
+# 8th September, 2026 (05:30pm IST, 9:00am BRT)
+
+**Attendees**: Aditi, Agriya, Melissa
+
+## Points to discuss
+
+- Gap-break down approach: creating a parallel daemon thread and recording the [`sys._current_frames`](https://docs.python.org/3/library/sys.html#sys._current_frames) in between events(i.e. in gaps).
+    - Sampling within a handler/event (like generate_gallery_rst --> ~40% of build)?
+    - [Agriya] conda-forge uses daemon thread for file watching
+    - this PR should be ready by thursday
+- uv.lock file in .gitignore? --> keep it in .gitignore for now; would need to update it weekly and it is mostly good to add for projects that require reproducibility.
+- zizmor (linting for GA) in pre-commit hook for now
+- Address review comments on GitHub actions PR
+- make 0.2.0 release after the above things are done! most likely by friday.
+- todo: work on blog
+- parallel builds and adding optimisations
+
+## Meeting notes
+
+- Melissa shared a doc of claude's review report (work on 1.1 and 1.5)
+- [Melissa] first priority: document the limitation; give users warnings if needed; second priority: work on fixing those limitations (context: making extension parallel safe)
+    - Add a warning in the report that it was a serial build
+    - add machine specs (number of cores can be tricky so don't mention those)
+
+- Projects to add: CPython, PyWavelets, pytest(furo theme), sympy, any projects in scientific python ecosystem
+- [Melissa] blog: good to have one optimisation (implemented preferably in sphinx by me) -- good for marketing the extension; add [@Cadair](https://github.com/Cadair)'s PR to the blog
+- reduce sphinx's minimum version to 8 so that scipy can also work with it.
+
+
+## Plan:
+
+- this week: gap break down and review comments and above todos; release by friday and spread the word
+- next week: making the extension parallel safe; optimisations; blog draft
+- last week: blog;QShare presentation; conference travel; open up any issues if needed; work on docs etc.
+
+
+---
+
+
+# 2nd September, 2026 (05:30pm IST, 9:00am BRT)
+
+**Attendees**: Aditi, Agriya, Melissa
+
+## Agenda
+
+### Updates:
+
+- Merged [PR#3](https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/3)
+- Made a release on [PyPI](https://pypi.org/project/sphinx-benchmark/) and [GitHub](https://github.com/Schefflera-Arboricola/sphinx-benchmark/releases/tag/v0.1.0)
+- Proposal to add sphinx-benchmark to sphinx org: https://github.com/sphinx-doc/sphinx/discussions/14652 (https://groups.google.com/g/sphinx-dev/c/R492a_Fsdvw)
+- basic CLI added (mostly AI):
+    - [PR#8](https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/8) - merged
+    - [PR#15](https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/15) - under review
+- https://github.com/pydata/pydata-sphinx-theme/pull/2477
+- Currently working on:
+    - trying to profile the gaps (https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues/9)
+
+- ToDos:
+    - Include project name and version in report: https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues/13
+    - add a release.md and work on https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues/14
+    - post the extension on Write the docs slack after 2nd release
+
+- internet/network --> flag these issues
+    - inter-sphinx
+    - [IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+
+- https://github.com/melissawm/minimalsphinx
+
+- ToDos before v2:
+    - show inter-sphinx in the benchmarks
+    - gaps break down profiling
+    - add name of the project/version in the benchmarks
+    - CLI with events/handler/gaps breakdown (reviews will come on this by tomorrow morning)
+
+
+---
+
+
 # 25th August, 2026 (05:30pm IST, 9:00am BRT)
 
 **Attendees**: Aditi, Melissa , Agriya

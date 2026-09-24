@@ -2,9 +2,9 @@ This repository includes:
 
 - [Latest CV](/CV.pdf)
 - Project Work, Blogs, and Reports
-    - WIP - Benchmarking and optimising Sphinx
-        - [Quansight Internship 2026](/sphinx/Quansight-OS-Internship-2026)
-            - [Work-updates](/sphinx/Quansight-OS-Internship-2026/daily_updates)
+    - [sphinx-benchmark](https://github.com/Schefflera-Arboricola/sphinx-benchmark)
+        - [Quansight Internship 2026](/sphinx-benchmark/Quansight-OS-Internship-2026)
+            - [Work-updates](/sphinx-benchmark/Quansight-OS-Internship-2026/daily_updates)
     - [scikit-image](https://github.com/scikit-image)
         - [NumFOCUS SDG 2024 (Round 3)](/scikit-image/Dispatching%28NumFOCUS_SDG_2024_R3%29) 
             - [Final report](https://github.com/Schefflera-Arboricola/blogs/blob/main/scikit-image/Dispatching(NumFOCUS_SDG_2024_R3)/final_report.md)
