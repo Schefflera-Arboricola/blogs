@@ -1,3 +1,47 @@
+## TL;DR
+
+Over the last month I turned sphinx-benchmark from a basic event and handler benchmark into a fuller profiling tool. The biggest addition was sampling-based gap breakdowns (PR #27): a daemon thread samples the build's call stacks to give function-wise breakdowns and call trees for the whole build, each event and handler, and the gaps between events. Python 3.15+ will use Tachyon for this (PR #42, documented in the README in #40). I also added more CLI options and report details, project and build info in the JSON, unique JSON filenames, configurable sampling intervals and a disable_sampling option. sphinx.ext.* handlers are now classified as extensions, so intersphinx and similar costs show up in the report. I lowered the minimum Sphinx version to 8.2 so SciPy can use it, and set up CI, zizmor, pre-commit.ci and trusted publishing. All of that shipped in the v0.2.0 release, and I opened several follow-up issues, including per-document breakdowns, free-threaded Python support and network overheads. Also, wrote the internship blog, presented it at QShare and opened a request to move the extension to the sphinx-contrib org and posted about this extension in various community channels.
+
+
+---
+
+
+## Week of Sep 28 - Oct 2
+
+### What went well this week? ✨
+
+- switching to tachyon for sampling for python>=3.15 : https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/42
+- added a section on sampling with tachyon in readme: https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/40
+- worked on blog: https://github.com/Quansight/Quansight-website/pull/1011
+- Qshare presentation + demo
+- proposal to add the sphinx-benchmark project to the sphinx-contrib org: https://github.com/sphinx-contrib/github-administration/issues/85
+- lightening talk proposal for IndiaFOSS(rejected): https://fossunited.org/c/indiafoss/2026communi-con/cfp/013k2ookbk
+- 1 PTO
+
+### What do you want to achieve/complete next week? ✅
+
+- get the blog published
+- complete the tranfer to sphinx-contrib
+- get PR#42 merged: https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/42 and then make a v0.3 release.
+- off-boarding
+
+### If only one deliverable/project could get done this week what would it be? 🚀
+
+- get the blog published
+- get PR#42 merged: https://github.com/Schefflera-Arboricola/sphinx-benchmark/pull/42 and then make a v0.3 release.
+- off-boarding
+
+### What's your biggest challenge right now, and how can I help? 🤝
+
+My biggest challenge this week is wrapping things up cleanly so the project is in good shape after the internship ends. A few things depend on others' timelines, like the blog being published, the sphinx-contrib transfer. But, I also give some time to those even after I off-board.
+
+A review of PR #42 and the blog PR this week would help a lot. So would a nudge or +1 on the sphinx-contrib issue if you have time. I'd also appreciate guidance on how I can further sustain myself as an open-source maintainer in the Scientific Python ecosystem and also some guidance on maintaining a project long-term as I plan to keep maintaining sphinx-benchmark and stay involved in the community. 
+
+Thank you for this opportunity to work with you all :)
+
+
+---
+
 
 ## Week of Sep 21 - Sep 25
 

@@ -1,6 +1,51 @@
 Notes : https://hackmd.io/@Schefflera-Arboricola/H1Gvmv5zGg/edit
 
 
+# 29th September, 2026 (05:30pm IST, 9:00am BRT)
+
+**Attendees**: Aditi, Agriya, Melissa
+
+## Updates/Points to discuss
+
+- blog PR: https://github.com/Quansight/Quansight-website/pull/1011
+- Integrating tachyon: https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues/41
+    - how will the integration and the user-interface look like?
+    - add page(s) in navbar that redirects to tachyon's flamegraph, heatmap, gecko, etc.
+    - [Agriya] start tachyon at config-inited and end at atexit register: https://docs.python.org/3/library/atexit.html
+        - [Aditi] should we write the json also in this register? (for later investigation)
+- posted about v0.2.0 release on WTD slack, github discussion proposal on sphinx repo and scientific python discord
+- update on sunpy-sphinx-theme optimisation: https://github.com/sunpy/sunpy-sphinx-theme/pull/332#issuecomment-5761433969
+    - latest: https://github.com/pydata/pydata-sphinx-theme/pull/2500
+
+
+## Meeting Notes
+
+- optimisations:
+    - [Melissa] Jinja templates - duplicate reading/writing in NumPy; add some caching in Sphinx for this
+    - [Agriya] PyWavelets - plotting in both png and pdf; pdf takes a lot of time and can be skipped; cwt notebook (6-7 mins) could be reduced; one line fix-- PR coming soon; setting nb_execution_mode=cache (?)
+        - [Melissa] same happens in numpy as well; pdf only needed when LaTeX
+        - plot extension on matplotlib - reach out to them for this
+        - for numpy plots are in the regular docstrings, and in pywavelets plots are in notebooks
+    - [Melissa] find_file_in_dirs : numpy docs checks if a file exists every time; caching can be done
+    - [Melissa] will create an issue on these!
+- docs, devexp, UX session at CAMP: Melissa and Agriya plans on discussing sphinx-benchmark there!
+- https://papyri.dev/ , https://github.com/jupyter/papyri
+    - sphinx without docutils
+    - also have back-refernces (you can see where all a page is referenced)
+
+
+### ToDos:
+
+- try integrating tachyon today-- but don't spend too much time on it
+- update blog
+    - update sunpy section; also mention that be careful with the benchmarking numbers
+- QShare presentation: 15mins + 5 mins
+- sphinx-contrib
+    - check if Aditi still gets to keep the admin rights to the repo after the org change
+
+
+---
+
 
 # 22nd September, 2026 (05:30pm IST, 9:00am BRT)
 

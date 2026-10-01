@@ -4,6 +4,7 @@ This repository includes:
 - Project Work, Blogs, and Reports
     - [sphinx-benchmark](https://github.com/Schefflera-Arboricola/sphinx-benchmark)
         - [Quansight Internship 2026](/sphinx-benchmark/Quansight-OS-Internship-2026)
+            - [Final blog](/sphinx-benchmark/Quansight-OS-Internship-2026/final_report/blog.md)
             - [Work-updates](/sphinx-benchmark/Quansight-OS-Internship-2026/daily_updates)
     - [scikit-image](https://github.com/scikit-image)
         - [NumFOCUS SDG 2024 (Round 3)](/scikit-image/Dispatching%28NumFOCUS_SDG_2024_R3%29) 
