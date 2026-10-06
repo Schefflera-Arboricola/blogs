@@ -1,0 +1,10 @@
+- go through the website, blogs, annual report thoroughly.
+- Ask pervious interns about their experiences: they are pretty friendly and nice!
+    - Read their blogs to have some talking points
+- My experience: I only had one interview with Melissa: nx-parallel walk through and talked about what I think of open source and trying to understand what kind of projects would I want to work on and would be a good fit for me-- make sure to have some questions at the end for the interviewer as well
+- practice your project/code walk through to be under 15 mins-- create slides, diagrams or additional material if you think that would convey the idea better or take less time.
+- Somethings i should have done better: 
+    - I should've done some more research on the different scientific python projects and Quansight's own direction(at the time), to have a better conversation around "what projects I would like to work on" during the interview
+    - have a good introduction ready-- my application wasn't perfect and yours also doesn't have to be.. at the end of interview I really wasn't expecting to hear back! 
+    - advice by one of the Quansight lab's employee: "try to highlight what each project's motivation was-- and have a coherent story around it"
+- Understanding contracts, etc. : a helpful video - https://youtu.be/skxhVv6_xVw?si=Rl4X1GtWeozF2dUk ; feel free to use LLMs (with a grain of salt) if something’s too complicated and you don’t have access to a lawyer.
